@@ -1,3 +1,61 @@
+/*-------------------------------------------------------------------------
+
+// Scaffolding
+// Settings for some of the most global styles.
+// --------------------------------------------------
+// Global text color on <body>
+//$text-color                   = $black-light;
+$text-color                   = #002736;
+
+// Global link color.
+//$link-color                   = $black-light;
+$link-color                    = #002736;
+$link-hover-color             = $black-deep;
+$link-decoration-color        = $grey-dark;
+$link-decoration-hover-color  = $black-deep;
+
+// Global border color.
+$border-color                 = $grey-light;
+
+// Background color for <body>
+//$body-bg-color                = white;
+$body-bg-color                = #272727;
+
+// Selection
+//$selection-bg                 = #bbb;
+//$selection-bg                 = $blue-deep;
+//$selection-bg                 = $white;
+//$selection-color              = white;
+$selection-color              = #005599;
+
+---------------------------------------------------------------------------*/
+/* ------------------------------------------------------------------------
+
+// Buttons
+// --------------------------------------------------
+$btn-font-weight                = normal;
+
+$btn-default-radius             = 0;
+$btn-default-bg                 = $black-deep;
+$btn-default-color              = white;
+$btn-default-font-size          = $font-size-small;
+$btn-default-border-width       = 2px;
+$btn-default-border-color       = $black-deep;
+$btn-default-hover-bg           = white;
+$btn-default-hover-color        = $black-deep;
+$btn-default-hover-border-color = $black-deep;
+
+----------------------------------------------------------------------------- */
+/* --------------------------------------------------
+
+// Button
+$btn-default-radius           = 2px;
+$btn-default-bg               = white;
+$btn-default-color            = $text-color;
+$btn-default-border-color     = $text-color;
+$btn-default-hover-color      = white;
+$btn-default-hover-bg         = $black-deep;
+--------------------------------------------------------------------*/
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -148,7 +206,7 @@ template {
 }
 ::selection {
   background: $selection-bg;
-  color: #036;
+  color: #48C9B0;
 }
 html,
 body {
@@ -156,7 +214,7 @@ body {
 }
 body {
   background: #000;
-  color: #002736;
+  color: #74C8FF;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1em;
   line-height: 1.8;
@@ -204,16 +262,16 @@ a,
 span.exturl {
   overflow-wrap: break-word;
   word-wrap: break-word;
-  border-bottom: 1px solid #999;
-  color: #002736;
+  border-bottom: 1px solid #222222;
+  color: #999999;
   outline: 0;
   text-decoration: none;
   cursor: pointer;
 }
 a:hover,
 span.exturl:hover {
-  border-bottom-color: #222;
-  color: #222;
+  border-bottom-color: #555555;
+  color: #74C8FF;
 }
 iframe,
 img,
@@ -295,10 +353,10 @@ td {
   border-bottom-width: 1px;
 }
 .btn {
-  background: #fff;
-  border: 2px solid #002736;
-  border-radius: 2px;
-  color: #002736;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #34495E;
+  border-radius: 0;
+  color: #34C8FF;
   display: inline-block;
   font-size: 0.875em;
   line-height: 2;
@@ -310,9 +368,9 @@ td {
   transition-timing-function: ease-in-out;
 }
 .btn:hover {
-  background: #222;
-  border-color: #222;
-  color: #fff;
+  background: rgba(93, 102, 126, 0.3);
+  border-color: #34C8FF;
+  color: #CACFD2;
 }
 .btn + .btn {
   margin: 0 0 8px 8px;
@@ -396,8 +454,8 @@ td {
 }
 pre,
 .highlight {
-  background: #000;
-  color: #eaeaea;
+  background: rgba(35,36,31,0.3);
+  color: #ba4444;
   line-height: 1.3;
   margin: 0 auto 20px;
 }
@@ -419,13 +477,13 @@ pre {
 }
 pre code {
   background: none;
-  color: #eaeaea;
+  color: #ba4444;
   font-size: 0.875em;
   padding: 0;
   text-shadow: none;
 }
 .highlight *::selection {
-  background: #424242;
+  background: #48C9B0;
 }
 .highlight pre {
   border: 0;
@@ -442,8 +500,8 @@ pre code {
   padding: 0;
 }
 .highlight figcaption {
-  background: #000;
-  color: #ababab;
+  background: #ccc;
+  color: #ba4444;
   line-height: 1em;
   margin: 0;
   padding: 0.5em;
@@ -457,21 +515,21 @@ pre code {
   clear: both;
 }
 .highlight figcaption a {
-  color: #eaeaea;
+  color: #ba4444;
   float: right;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #eaeaea;
+  border-bottom-color: #ba4444;
 }
 .highlight .gutter pre {
-  background: #292929;
-  color: #666;
+  background: rgba(0,0,0,0.3);
+  color: rgba(149,153,136,0.3);
   padding-left: 10px;
   padding-right: 10px;
   text-align: right;
 }
 .highlight .code pre {
-  background: #000;
+  background: rgba(35,36,31,0.3);
   padding-left: 10px;
   width: 100%;
 }
@@ -486,78 +544,6 @@ pre code {
 }
 .gist table td {
   border: 0;
-}
-pre .deletion {
-  background: #800000;
-}
-pre .addition {
-  background: #008000;
-}
-pre .meta {
-  color: #e7c547;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-pre .comment {
-  color: #969896;
-}
-pre .variable,
-pre .attribute,
-pre .tag,
-pre .name,
-pre .regexp,
-pre .ruby .constant,
-pre .xml .tag .title,
-pre .xml .pi,
-pre .xml .doctype,
-pre .html .doctype,
-pre .css .id,
-pre .css .class,
-pre .css .pseudo {
-  color: #d54e53;
-}
-pre .number,
-pre .preprocessor,
-pre .built_in,
-pre .builtin-name,
-pre .literal,
-pre .params,
-pre .constant,
-pre .command {
-  color: #e78c45;
-}
-pre .ruby .class .title,
-pre .css .rules .attribute,
-pre .string,
-pre .symbol,
-pre .value,
-pre .inheritance,
-pre .header,
-pre .ruby .symbol,
-pre .xml .cdata,
-pre .special,
-pre .formula {
-  color: #b9ca4a;
-}
-pre .title,
-pre .css .hexcolor {
-  color: #70c0b1;
-}
-pre .function,
-pre .python .decorator,
-pre .python .title,
-pre .ruby .function .title,
-pre .ruby .title .keyword,
-pre .perl .sub,
-pre .javascript .title,
-pre .coffeescript .title {
-  color: #7aa6da;
-}
-pre .keyword,
-pre .javascript .function {
-  color: #c397d8;
 }
 .blockquote-center {
   border-left: none;
@@ -705,7 +691,7 @@ pre .javascript .function {
 }
 .post-body .tabs ul.nav-tabs li.tab.active a,
 .tabs-comment ul.nav-tabs li.tab.active a {
-  color: #002736;
+  color: #999999;
   cursor: default;
 }
 .post-body .tabs .tab-content .tab-pane,
@@ -902,9 +888,9 @@ pre .javascript .function {
   margin: 0.1em 0.2em;
 }
 .comment-button-group .comment-button.active {
-  background: #222;
-  border-color: #222;
-  color: #fff;
+  background: rgba(93, 102, 126, 0.3);
+  border-color: #34C8FF;
+  color: #CACFD2;
 }
 .comment-position {
   display: none;
@@ -975,7 +961,7 @@ pre .javascript .function {
 .brand {
   background: #222;
   border-bottom: none;
-  color: #fff;
+  color: #000;
   display: inline-block;
   line-height: 1.375em;
   padding: 0 40px;
@@ -1025,7 +1011,7 @@ pre .javascript .function {
   width: 22px;
 }
 .site-nav-toggle .toggle .toggle-line {
-  background: #002736;
+  background: #74C8FF;
   border-radius: 1px;
 }
 .site-nav {
@@ -1124,8 +1110,8 @@ pre .javascript .function {
 }
 .github-corner svg {
   border: 0;
-  color: #fff;
-  fill: #222;
+  color: #000;
+  fill: #003055;
   position: absolute;
   right: 0;
   top: 0;
@@ -1134,7 +1120,7 @@ pre .javascript .function {
 @media (max-width: 991px) {
   .github-corner svg {
     color: #222;
-    fill: #fff;
+    fill: #003055;
   }
   .github-corner .github-corner:hover .octo-arm {
     animation: none;
@@ -1274,7 +1260,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #04ffd0;
+  background: #96c755;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1524,7 +1510,7 @@ pre .javascript .function {
   }
 }
 .with-love {
-  color: #003636;
+  color: #002736;
   display: inline-block;
   margin: 0 5px;
 }
@@ -1681,7 +1667,7 @@ pre .javascript .function {
   opacity: 0.8;
 }
 .reading-progress-bar {
-  background: #002736;
+  background: #003636;
   display: block;
   height: 2px;
   left: 0;
@@ -1974,13 +1960,13 @@ pre .javascript .function {
 }
 .posts-expand .post-title-link {
   border-bottom: none;
-  color: #001836;
+  color: #34C8FF;
   display: inline-block;
   position: relative;
   vertical-align: top;
 }
 .posts-expand .post-title-link::before {
-  background: #000;
+  background: #74C8FF;
   bottom: 0;
   content: '';
   height: 2px;
@@ -2002,7 +1988,7 @@ pre .javascript .function {
   margin-left: 5px;
 }
 .posts-expand .post-meta {
-  color: #999;
+  color: #999999;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
   margin: 3px 0 60px 0;
@@ -2054,7 +2040,7 @@ pre .javascript .function {
 }
 .post-nav-item a {
   border-bottom: none;
-  color: #002736;
+  color: #999999;
   display: block;
   font-size: 0.875em;
   line-height: 1.6;
@@ -2062,7 +2048,7 @@ pre .javascript .function {
 }
 .post-nav-item a:hover {
   border-bottom: none;
-  color: #222;
+  color: #74C8FF;
 }
 .post-nav-item a:active {
   top: 2px;
@@ -2304,7 +2290,7 @@ ul.breadcrumb li + li:last-child {
   margin: 10px;
 }
 .tag-cloud a:hover {
-  color: #222 !important;
+  color: #74C8FF !important;
 }
 .search-pop-overlay {
   background: rgba(0,0,0,0.3);
@@ -2438,7 +2424,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .header-inner {
-  background: #fff;
+  background: ;
   border-radius: initial;
   box-shadow: initial;
   overflow: hidden;
@@ -2473,7 +2459,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .content-wrap {
-  background: #bababa;
+  background: ;
   border-radius: initial;
   box-shadow: initial;
   box-sizing: border-box;
@@ -2530,7 +2516,7 @@ ul.breadcrumb li + li:last-child {
 }
 .site-meta {
   background: #222;
-  color: #fff;
+  color: rgba(26,188,156,0.3);
   padding: 20px 0;
 }
 @media (max-width: 991px) {
@@ -2662,11 +2648,11 @@ ul.breadcrumb li + li:last-child {
   color: #222;
 }
 .sidebar-inner {
-  background: #000;
+  background: rgba(0,0,0,0);
   border-radius: initial;
   box-shadow: initial;
   box-sizing: border-box;
-  color: #002736;
+  color: #74C8FF;
   width: 240px;
   opacity: 0;
 }

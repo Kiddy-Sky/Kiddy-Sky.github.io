@@ -4,7 +4,7 @@
     <title>第二步：XXX</title>
     <url>/2021/04/22/2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>简介</p>
-<a id="more"></a>
+<span id="more"></span>
 
 ]]></content>
       <categories>
@@ -13,57 +13,50 @@
       <tags>
         <tag>操作系统真象还原</tag>
         <tag>OS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一步：安装虚拟机</title>
-    <url>/2021/04/21/1-install/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>为了保护自己的电脑，不至于折腾崩了，选择在<code>virtualbox</code>虚拟机中装一个虚拟的<code>Linux</code>系统，然后在 Linux 中装一个<code>Bochs</code>虚拟机来模拟硬件。</p>
-<a id="more"></a>
-
-<p>1.准备工作<br><code>virtualbox</code>可以在<a href="http://download.virtualbox.org/virtualbox" target="_blank" rel="noopener">官网</a>选择一个合适的版本下载安装。<br><code>centos</code>可以在<a href="https://www.centos.org/download/" target="_blank" rel="noopener">官网</a>选择一个合适的版本下载安装, 若想和书中版本一样的，可以去<a href="http://vault.centos.org" target="_blank" rel="noopener">这里</a>下载安装。我选择<a href="http://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso" target="_blank" rel="noopener">镜像</a>下载 CentOS-7-x86_64-DVD-2009.iso 版本的。</p>
-<p>2.安装虚拟的 Linux 系统过程<br>安装 virtualbox 没什么可说的。在 virtualbox 中安装 centos 稍微麻烦了一点。</p>
-<p>2.1 在 virtualbox 选择<code>新建</code><br><img src="/2021/04/21/1-install/1_new-built.png" alt="新建" title="new-built"> </p>
-<p>2.2 接着<code>创建</code><br><img src="/2021/04/21/1-install/1_create.png" alt="创建" title="create"> </p>
-<p>2.3 然后<code>配置</code><br>选择存储-&gt;选择一个虚拟光盘-&gt;选择下载好的<code>CentOS-7-x86_64-DVD-2009.iso</code><br><img src="/2021/04/21/1-install/1_configure_mem.png" alt="配置存储" title="configure"> </p>
-<p>选择系统-&gt;将启动顺序的光驱移到第一位。<br><img src="/2021/04/21/1-install/1_configure_sys.png" alt="配置系统" title="configure"> </p>
-<p>其他配置</p>
-<p>其他配置：共享粘贴板(常规)-&gt;网络<br><img src="/2021/04/21/1-install/1_configure_net.png" alt="常规配置" title="configure"><br>-&gt;共享文件夹<br><img src="/2021/04/21/1-install/1_configure_share.png" alt="配置共享文件夹" title="configure"></p>
-<p>2.4 在 virtualbox 选择新创建好的虚拟机，点击<code>启动</code>，进入安装界面<br><img src="/2021/04/21/1-install/1_install_1.png" alt="启动安装" title="install"></p>
-<p><strong>注意：<code>Right Ctrl</code> 是指右边的 Ctrl 键。可以切换鼠标在虚拟机外还是虚拟机内。</strong></p>
-<p>根据自己的需要选择安装的软件，我安装的是有桌面的。<br><img src="/2021/04/21/1-install/1_install_desktop.png" alt="选择软件" title="desktop"> </p>
-<p>选择完需要安装的软件后，接着选择安装的位置。如果空间足够，可以直接选择自动创建分区，也可以自己创建分区。我安装的时候空闲空间只有 990MB 左右，根本不够安装桌面版的。所以选择了自己创建分区，然后发现已经有自动创建好的分区了，可能是之前安装的时候创建的，但是当时我安装到重启的时候异常退出了，再启动又是重新安装，所以是原来自动创建的分区。因为原来创建的我也没用过，又不能修改，所以我就直接删掉，然后自己重新创建分区，这样就有足够空闲的空间可以用了。</p>
-<p><img src="/2021/04/21/1-install/1_install_location.png" alt="选择安装位置" title="location"> </p>
-<p>分区创建好之后点击左上角的完成，会出现如下提示：<br><img src="/2021/04/21/1-install/1_install_accept.png" alt="接受更改" title="accept"> </p>
-<p>点击右下角的 接受更改 即可。</p>
-<p>点击 开始安装<br><img src="/2021/04/21/1-install/1_install_2.png" alt="开始安装" title="install"> </p>
-<p>等待安装的过程中根据需要顺便把以下 配置 配置好：<br><img src="/2021/04/21/1-install/1_install_wait.png" alt="等待安装" title="wait"> </p>
-<p>2.5 重启配置<br>重启: 我每次都是重启的时候异常退出，崩了就重新安装，安装了好几次才成功。<br><img src="/2021/04/21/1-install/1_install_restart.png" alt="重启" title="restart"> </p>
-<p>3.配置共享文件夹</p>
-<pre><code>mkdir /home/QYT/share  # 新建文件夹，用来存放访问共享文件夹的内容
-sudo mount -t vboxsf VBshare /home/QYT/share # VBshare：前面设置的共享文件夹的名字，/home/QYT/share 在Linux 中访问共享文件夹内容的文件夹路径</code></pre><p>4.安装 Bochs 虚拟机模拟硬件<br>4.1 下载<a href="https://sourceforge.net/projects/bochs/files/bochs/2.6.2/bochs-2.6.2.tar.gz/download" target="_blank" rel="noopener"> <code>Bochs</code> </a>。我用浏览器自带的下载工具下载太慢了，用迅雷下载就很快。下载后解压到共享文件夹，然后复制到 Linux 系统中，毕竟还是原来的操作系统用得更加方便顺溜。不过要是想要体验用 Linux 终端解压，也不是不行。<br>我将解压后的 bochs 放进了/home/QYT/OS 中。</p>
-<p>4.2 打开终端，切换到 bin 目录，运行<br>    cd /home/QYT/OS/bochs/bin<br>    ./</p>
-<p>4.3</p>
-<p>5.启动 Bochs </p>
-]]></content>
-      <categories>
-        <category>OS</category>
-      </categories>
-      <tags>
-        <tag>操作系统真象还原</tag>
-        <tag>OS</tag>
-        <tag>virtualbox</tag>
-        <tag>Linux</tag>
-        <tag>Bochs</tag>
       </tags>
   </entry>
   <entry>
     <title>《操作系统真象还原》学习记录</title>
     <url>/2021/04/21/0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>主要是简单记录下我跟着《操作系统操作系统真象还原操作系统真象还原真象还原》这本书学习的过程。方便自己以后快速回忆一下。</p>
-<a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&#8195;&#8195;主要是简单记录下我跟着《操作系统真象还原》这本书学习的过程。方便自己以后快速回忆一下。</p>
+<span id="more"></span>
 
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-md"><a href="#1-md" class="headerlink" title="1.md"></a><a href="1.md">1.md</a></h3><h3 id="2-md"><a href="#2-md" class="headerlink" title="2.md"></a><a href="2.md">2.md</a></h3><h3 id><a href="#" class="headerlink" title></a></h3><h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><h3 id="-2"><a href="#-2" class="headerlink" title></a></h3><ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-md"><a href="#1-md" class="headerlink" title="1.md"></a><a href="1-install.md">1.md</a></h3><h3 id="2-md"><a href="#2-md" class="headerlink" title="2.md"></a><a href="2.md">2.md</a></h3><pre><code class="bash">    sudo cd /
+    mkdir sud</code></pre>
+<pre><code class="shell">    sudo cd /
+    mkdir sud</code></pre>
+<pre><code class="cpp">#include &lt;stdio.h&gt; 
+
+#define N 10   // TSP问题的数量
+#define TIME 3 //1h
+
+#define CLOCKS_PER_SEC 1000000 
+
+void u_alarm_handler(); 
+
+void exe_type(char* exe_name_and_path, double *totaltime, char* TSP);  // 执行1次程序，解决1个TSP问题
+
+//int flag = 0; 
+
+int main()
+&#123;
+    char TSP[N+1] = &quot;2104101279\0&quot;;  // TSP问题的数据
+    double A[N], B[N]; 
+    int i = 0; 
+    for(i; i &lt; N; i++)
+    &#123;
+        exe_type(&quot;a.out&quot;, &amp;A[i], &amp;TSP[i]); // A.exe 执行, 解决 TSP[i] 问题并将结果输出
+        exe_type(&quot;b.out&quot;, &amp;B[i], &amp;TSP[i]); // B.exe 执行, 解决 TSP[i] 问题并将结果输出
+        printf(&quot;A[%d] = %8f, B[%d] = %8f \n&quot;, i, A[i], i, B[i]); 
+    &#125;
+    return 0;
+&#125;
+
+void u_alarm_handler()
+&#123;
+    abort(); 
+&#125;</code></pre>
+<ul>
 <li><strong>学习的本质是一个不断抄袭、模仿、练习、理解再创新的过程。</strong></li>
 </ul>
 ]]></content>
@@ -77,20 +70,33 @@ sudo mount -t vboxsf VBshare /home/QYT/share # VBshare：前面设置的共享�
   </entry>
   <entry>
     <title>Windows 系統下 利用 GitHub 简单搭建博客</title>
-    <url>/2020/11/01/build_my_blog/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>记录一下自己在<code>Windows</code>系統下利用<code>GitHub</code>简单搭建博客的过程，因为有很多不懂的地方，所以走了一些弯路。而我相信，这些问题以后我还是会犯的，所以简单记录一下，等以后又出现类似的问题找不着北的时候可以翻翻看（我太菜了</p>
-<a id="more"></a>
+    <url>/2021/04/24/build_my_blog/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&#8195;&#8195;记录一下自己在<code>Windows</code>系統下利用<code>GitHub</code>简单搭建博客的过程，因为有很多不懂的地方，所以走了一些弯路。而我相信，这些问题以后我还是会犯的，所以简单记录一下，等以后又出现类似的问题找不着北的时候可以翻翻看（我太菜了</p>
+<span id="more"></span>
 
 <ul>
-<li><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><h5 id="1-注册一个-GitHub-账号"><a href="#1-注册一个-GitHub-账号" class="headerlink" title="1. 注册一个 GitHub 账号"></a>1. 注册一个 <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> 账号</h5><h5 id="2-创建GitHub仓库，名字为：你的GitHub名字-github-io"><a href="#2-创建GitHub仓库，名字为：你的GitHub名字-github-io" class="headerlink" title="2. 创建GitHub仓库，名字为：你的GitHub名字.github.io"></a>2. 创建GitHub仓库，名字为：你的GitHub名字.github.io</h5><h5 id="3-安装-Git-Bash"><a href="#3-安装-Git-Bash" class="headerlink" title="3. 安装 Git Bash"></a>3. 安装 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git Bash</a></h5><h5 id="4-安装-Node-js"><a href="#4-安装-Node-js" class="headerlink" title="4. 安装 Node.js"></a>4. 安装 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></h5><h5 id="5-安装-Hexo"><a href="#5-安装-Hexo" class="headerlink" title="5. 安装 Hexo"></a>5. 安装 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a></h5><h5 id="6-C-Users-work-Blog-gt-hexo-init-Sky-初始化博客内容"><a href="#6-C-Users-work-Blog-gt-hexo-init-Sky-初始化博客内容" class="headerlink" title="6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容"></a>6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容</h5><h5 id="7-修改C-Users-work-Blog-Sky-themes-next目录下的-config-yml主题配置文件，更改博客配置"><a href="#7-修改C-Users-work-Blog-Sky-themes-next目录下的-config-yml主题配置文件，更改博客配置" class="headerlink" title="7. 修改C:\Users\work\Blog\Sky\themes\next目录下的_config.yml主题配置文件，更改博客配置"></a>7. 修改<code>C:\Users\work\Blog\Sky\themes\next</code>目录下的<code>_config.yml</code>主题配置文件，更改博客配置</h5><h5 id="8-更新并重新部署博客的步骤："><a href="#8-更新并重新部署博客的步骤：" class="headerlink" title="8. 更新并重新部署博客的步骤："></a><strong>8. 更新并重新部署博客的步骤：</strong></h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-清除-public-目录下的文件"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-清除-public-目录下的文件" class="headerlink" title="&#8195; &#8195;  C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件"></a>&#8195; &#8195;  C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-生成静态文件"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-生成静态文件" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-启动服务器查看本地博客"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-启动服务器查看本地博客" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-将博客部署到-Github-上"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-将博客部署到-Github-上" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上</h5></li>
+<li><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><h5 id="1-注册一个-GitHub-账号"><a href="#1-注册一个-GitHub-账号" class="headerlink" title="1. 注册一个 GitHub 账号"></a>1. 注册一个 <a href="https://github.com">GitHub</a> 账号</h5><h5 id="2-创建GitHub仓库，名字为：你的GitHub名字-github-io"><a href="#2-创建GitHub仓库，名字为：你的GitHub名字-github-io" class="headerlink" title="2. 创建GitHub仓库，名字为：你的GitHub名字.github.io"></a>2. 创建GitHub仓库，名字为：你的GitHub名字.github.io</h5><h5 id="3-安装-Git-Bash并做好相关配置"><a href="#3-安装-Git-Bash并做好相关配置" class="headerlink" title="3. 安装 Git Bash并做好相关配置"></a>3. 安装 <a href="https://git-scm.com/download/win">Git Bash</a>并做好相关配置</h5><h5 id="4-安装-Node-js"><a href="#4-安装-Node-js" class="headerlink" title="4. 安装 Node.js"></a>4. 安装 <a href="https://nodejs.org/en/">Node.js</a></h5><h5 id="5-安装-Hexo"><a href="#5-安装-Hexo" class="headerlink" title="5. 安装 Hexo"></a>5. 安装 <a href="https://hexo.io/">Hexo</a></h5><h5 id="6-C-Users-work-Blog-gt-hexo-init-Sky-初始化博客内容"><a href="#6-C-Users-work-Blog-gt-hexo-init-Sky-初始化博客内容" class="headerlink" title="6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容"></a>6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容</h5><h5 id="7-修改C-Users-work-Blog-Sky-themes-next目录下的-config-yml主题配置文件，更改博客配置"><a href="#7-修改C-Users-work-Blog-Sky-themes-next目录下的-config-yml主题配置文件，更改博客配置" class="headerlink" title="7. 修改C:\Users\work\Blog\Sky\themes\next目录下的_config.yml主题配置文件，更改博客配置"></a>7. 修改<code>C:\Users\work\Blog\Sky\themes\next</code>目录下的<code>_config.yml</code>主题配置文件，更改博客配置</h5><h5 id="8-更新并重新部署博客的步骤："><a href="#8-更新并重新部署博客的步骤：" class="headerlink" title="8. 更新并重新部署博客的步骤："></a><strong>8. 更新并重新部署博客的步骤：</strong></h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-清除-public-目录下的文件"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-清除-public-目录下的文件" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-生成静态文件"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-生成静态文件" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-启动服务器查看本地博客"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-启动服务器查看本地博客" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-将博客部署到-Github-上"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-将博客部署到-Github-上" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上</h5></li>
 <li><h3 id="过程："><a href="#过程：" class="headerlink" title="过程："></a><strong>过程：</strong></h3></li>
 <li><h4 id="需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的"><a href="#需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的" class="headerlink" title="需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的"></a>需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的</h4></li>
 </ul>
 <blockquote>
 <ol>
-<li>注册一个<code>GitHub</code>账号，注册后顺便创建一个与你用户名相同的<code>.github.io</code>仓库即<code>你的名字.github.io</code>，这样等你搭建好博客之后就能用<code>https://你的用户名.github.io</code>访问你的博客了。到此问题应该不大，如果有，多百度几次。<a href="https://github.com" target="_blank" rel="noopener">GitHub 官网</a></li>
-<li>安装[ <code>Git Bash</code>，问题应该也不大。<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git Bash 官网</a> </li>
-<li>安装<code>Node.js</code>，问题应该也不大，一路默认安装下去就行了。<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js 官网</a> </li>
+<li>注册一个 GitHub 账号，注册后顺便创建一个与你用户名相同的<code>.github.io</code>仓库即<code>你的名字.github.io</code>，这样等你搭建好博客之后就能用<code>https://你的用户名.github.io</code>访问你的博客了。到此问题应该不大，如果有，多百度几次。<a href="https://github.com">GitHub 官网</a></li>
+<li>安装<code>Git Bash</code>，问题应该也不大。<a href="https://git-scm.com/download/win">Git Bash 官网</a> </li>
+<li>配置 <code>SSH</code>。<br>&#8195;&#8195;先检查是否配置了 SSH：在 Bash 中输入如下命令，若出现以下提示，说明还没有配置 SSH 。<pre><code class="bash"> $ cd ~/.ssh
+ bash: cd: /c/Users/asus/.ssh: No such file or directory</code></pre>
+&#8195;&#8195;配置 SSH ：<pre><code class="bash"> ssh-keygen -t rsa -C &quot;你的邮件地址&quot;</code></pre>
+&#8195;&#8195;然后打开 SSH key，将这一串内容复制到你的 github 主页：settings -&gt; SSH and GPG keys -&gt; New SSH key -&gt; key<pre><code class="bash"> $ cat ~/.ssh/id_rsa.pub</code></pre>
+&#8195;&#8195;测试能否使用：出现类似提示就是成功了。<pre><code class="bash"> $ ssh -T git@github.com # 邮箱地址不用改
+ Hi Kiddy-Sky! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></pre>
+&#8195;&#8195;最后绑定用户。每一个 Git 的提交都会使用这些信息，并且会写入到每一次提交中。<pre><code class="bash"> $ git config --global user.name &quot;liuxianan&quot;// 你的github用户名，非昵称
+ $ git config --global user.email  &quot;xxx@qq.com&quot;// 填写你的github注册邮箱</code></pre>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>安装<code>Node.js</code>，问题应该也不大，一路默认安装下去就行了。<a href="https://nodejs.org/en/">Node.js 官网</a> </li>
 <li>安装<code>Hexo</code>，这个我貌似出了一点状况。</li>
 <li>配置好相关的环境。</li>
 </ol>
@@ -101,68 +107,291 @@ sudo mount -t vboxsf VBshare /home/QYT/share # VBshare：前面设置的共享�
 <blockquote>
 <ol>
 <li>在<code>Blog</code>文件夹打开<code>CMD</code></li>
-<li>查看是否安装好<code>npm</code>和<code>node</code>，看到出现版本信息，证明安装好了。<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">node</span> -<span class="title">v</span></span></span><br><span class="line"><span class="function"><span class="title">v12</span>.13.0</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">npm</span> -<span class="title">v</span></span></span><br><span class="line"><span class="function">6.12.0</span></span><br></pre></td></tr></table></figure></li>
-<li>接着安装<code>Hexo</code>：<a href="https://hexo.io" target="_blank" rel="noopener">Hexo官网</a>。如果可以直接在当前目录下右键打开 CMD，不行就打开<code>CMD</code>后<code>cd</code>到你的博客文件夹目录下，或者你安装了<code>Git</code>后可以直接在目标文件夹下直接右键打开<code>Git Bash</code>。<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cil</span><br><span class="line">npm install hexo-cil -g</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><figcaption><span>## 输入以上2条命令时都出现如下错误：</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">npm</span> <span class="title">install</span> -<span class="title">g</span> <span class="title">hexo</span>-<span class="title">cil</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! <span class="title">code</span> <span class="title">E404</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404 <span class="title">Not</span> <span class="title">Found</span> - <span class="title">GET</span> <span class="title">https</span>://<span class="title">registry.npmjs.org</span>/<span class="title">hexo</span>-<span class="title">cil</span> - <span class="title">Not</span> <span class="title">found</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404  '<span class="title">hexo</span>-<span class="title">cil</span>@<span class="title">latest</span>' <span class="title">is</span> <span class="title">not</span> <span class="title">in</span> <span class="title">the</span> <span class="title">npm</span> <span class="title">registry</span>.</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404 <span class="title">You</span> <span class="title">should</span> <span class="title">bug</span> <span class="title">the</span> <span class="title">author</span> <span class="title">to</span> <span class="title">publish</span> <span class="title">it</span> (<span class="title">or</span> <span class="title">use</span> <span class="title">the</span> <span class="title">name</span> <span class="title">yourself</span>!)</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404 <span class="title">Note</span> <span class="title">that</span> <span class="title">you</span> <span class="title">can</span> <span class="title">also</span> <span class="title">install</span> <span class="title">from</span> <span class="title">a</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! 404 <span class="title">tarball</span>, <span class="title">folder</span>, <span class="title">http</span> <span class="title">url</span>, <span class="title">or</span> <span class="title">git</span> <span class="title">url</span>.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>! <span class="title">A</span> <span class="title">complete</span> <span class="title">log</span> <span class="title">of</span> <span class="title">this</span> <span class="title">run</span> <span class="title">can</span> <span class="title">be</span> <span class="title">found</span> <span class="title">in</span>:</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">ERR</span>!     <span class="title">C</span>:\<span class="title">Users</span>\<span class="title">asus</span>\<span class="title">AppData</span>\<span class="title">Roaming</span>\<span class="title">npm</span>-<span class="title">cache</span>\<span class="title">_logs</span>\2019-11-02<span class="title">T11_39_50_447Z</span>-<span class="title">debug.log</span>	 </span></span><br></pre></td></tr></table></figure>
-然后我输入<code>hexo -v</code>想看下是否安装了<code>hexo</code>，出现了问题<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">hexo</span> -<span class="title">v</span></span></span><br><span class="line"><span class="function">'<span class="title">hexo</span>' 不是内部或外部命令，也不是可运行的程序</span></span><br><span class="line"><span class="function">或批处理文件。</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>我记得是安装过了的，因为原来搭建的博客有些地方有点问题，让我不太满意，我又找不到问题出在哪里，所以我是重新再搭建一个。所以我觉得出现这个问题很奇怪，我以为是我环境没配置好，所以又去看了下，觉得应该没有问题才对。然后我又在<code>Blog</code>文件夹打开<code>Git Bash</code>，输入如下命令查看，还是有问题。</p>
-</blockquote>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">asus@DESKTOP-<span class="number">58</span>AL0J1 MINGW64 /c/Users/work/Blog (master)</span><br><span class="line">$ hexo -v</span><br><span class="line"><span class="function">bash: <span class="title">hexo</span>: <span class="title">command</span> <span class="title">not</span> <span class="title">found</span></span></span><br></pre></td></tr></table></figure>
-然后我又来试试看输入以下命令，发现可以了耶。（虽然我还是很纳闷，怎么上次搭建博客的时候<code>hexo -v</code>就能直接用，这次需要加上<code>npm</code><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">asus@DESKTOP-<span class="number">58</span>AL0J1 MINGW64 /c/Users/work/Blog (master)</span><br><span class="line">$ npm hexo -v</span><br><span class="line"><span class="number">6</span>.<span class="number">12</span>.<span class="number">0</span> </span><br><span class="line"></span><br><span class="line">asus@DESKTOP-<span class="number">58</span>AL0J1 MINGW64 /c/Users/work/Blog (master)</span><br><span class="line">$ npm hexo-cil -v</span><br><span class="line"><span class="number">6</span>.<span class="number">12</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
-然后我又屁颠屁颠跑去<code>CMD</code>命令窗口输入命令，果然，没问题了。(个人喜欢在<code>CMD</code>输入命令，因为可以复制粘贴，我在<code>Git Bash</code>粘贴不了)<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">npm</span> <span class="title">hexo</span> -<span class="title">v</span></span></span><br><span class="line"><span class="function">6.12.0</span></span><br></pre></td></tr></table></figure>
-然后接着输入（为什么这样就可以，咱也不懂，咱也不敢问，咱也不知道问谁<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">npm</span> <span class="title">install</span> <span class="title">hexo</span> --<span class="title">save</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">saveError</span> <span class="title">ENOENT</span>: <span class="title">no</span> <span class="title">such</span> <span class="title">file</span> <span class="title">or</span> <span class="title">directory</span>, <span class="title">open</span> '<span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">package.json</span>'</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">notice</span> <span class="title">created</span> <span class="title">a</span> <span class="title">lockfile</span> <span class="title">as</span> <span class="title">package</span>-<span class="title">lock.json</span>. <span class="title">You</span> <span class="title">should</span> <span class="title">commit</span> <span class="title">this</span> <span class="title">file</span>.</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">enoent</span> <span class="title">ENOENT</span>: <span class="title">no</span> <span class="title">such</span> <span class="title">file</span> <span class="title">or</span> <span class="title">directory</span>, <span class="title">open</span> '<span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">package.json</span>'</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">Blog</span> <span class="title">No</span> <span class="title">description</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">Blog</span> <span class="title">No</span> <span class="title">repository</span> <span class="title">field</span>.</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">Blog</span> <span class="title">No</span> <span class="title">README</span> <span class="title">data</span></span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">Blog</span> <span class="title">No</span> <span class="title">license</span> <span class="title">field</span>.</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">optional</span> <span class="title">SKIPPING</span> <span class="title">OPTIONAL</span> <span class="title">DEPENDENCY</span>: <span class="title">fsevents</span>@2.1.1 (<span class="title">node_modules</span>\<span class="title">fsevents</span>):</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">notsup</span> <span class="title">SKIPPING</span> <span class="title">OPTIONAL</span> <span class="title">DEPENDENCY</span>: <span class="title">Unsupported</span> <span class="title">platform</span> <span class="title">for</span> <span class="title">fsevents</span>@2.1.1: <span class="title">wanted</span> &#123;"<span class="title">os</span>":"<span class="title">darwin</span>","<span class="title">arch</span>":"<span class="title">any</span>"&#125; (<span class="title">current</span>: &#123;"<span class="title">os</span>":"<span class="title">win32</span>","<span class="title">arch</span>":"<span class="title">x64</span>"&#125;)</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">optional</span> <span class="title">SKIPPING</span> <span class="title">OPTIONAL</span> <span class="title">DEPENDENCY</span>: <span class="title">fsevents</span>@1.2.9 (<span class="title">node_modules</span>\<span class="title">nunjucks</span>\<span class="title">node_modules</span>\<span class="title">fsevents</span>):</span></span><br><span class="line"><span class="function"><span class="title">npm</span> <span class="title">WARN</span> <span class="title">notsup</span> <span class="title">SKIPPING</span> <span class="title">OPTIONAL</span> <span class="title">DEPENDENCY</span>: <span class="title">Unsupported</span> <span class="title">platform</span> <span class="title">for</span> <span class="title">fsevents</span>@1.2.9: <span class="title">wanted</span> &#123;"<span class="title">os</span>":"<span class="title">darwin</span>","<span class="title">arch</span>":"<span class="title">any</span>"&#125; (<span class="title">current</span>: &#123;"<span class="title">os</span>":"<span class="title">win32</span>","<span class="title">arch</span>":"<span class="title">x64</span>"&#125;)</span></span><br><span class="line"><span class="function">     </span></span><br><span class="line"><span class="function">+ <span class="title">hexo</span>@4.0.0</span></span><br><span class="line"><span class="function"><span class="title">added</span> 287 <span class="title">packages</span> <span class="title">from</span> 438 <span class="title">contributors</span> <span class="title">and</span> <span class="title">audited</span> 2458 <span class="title">packages</span> <span class="title">in</span> 72.541<span class="title">s</span></span></span><br><span class="line"><span class="function"><span class="title">found</span> 0 <span class="title">vulnerabilities</span></span></span><br></pre></td></tr></table></figure>
-然后再输入发现能用了耶。（其实我不知道这些命令的具体用途，瞎按就是了，能用就行，用多了或者就能总结出来了。不管黑猫白猫，抓到耗子的就是好猫。嘿嘿<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">hexo</span> -<span class="title">v</span></span></span><br><span class="line"><span class="function"><span class="title">hexo</span>-<span class="title">cli</span>: 3.1.0</span></span><br><span class="line"><span class="function"><span class="title">os</span>: <span class="title">Windows_NT</span> 10.0.18362 <span class="title">win32</span> <span class="title">x64</span></span></span><br><span class="line"><span class="function"><span class="title">node</span>: 12.13.0</span></span><br><span class="line"><span class="function"><span class="title">v8</span>: 7.7.299.13-<span class="title">node</span>.12</span></span><br><span class="line"><span class="function"><span class="title">uv</span>: 1.32.0</span></span><br><span class="line"><span class="function"><span class="title">zlib</span>: 1.2.11</span></span><br><span class="line"><span class="function"><span class="title">brotli</span>: 1.0.7</span></span><br><span class="line"><span class="function"><span class="title">ares</span>: 1.15.0</span></span><br><span class="line"><span class="function"><span class="title">modules</span>: 72</span></span><br><span class="line"><span class="function"><span class="title">nghttp2</span>: 1.39.2</span></span><br><span class="line"><span class="function"><span class="title">napi</span>: 5</span></span><br><span class="line"><span class="function"><span class="title">llhttp</span>: 1.1.4</span></span><br><span class="line"><span class="function"><span class="title">http_parser</span>: 2.8.0</span></span><br><span class="line"><span class="function"><span class="title">openssl</span>: 1.1.1<span class="title">d</span></span></span><br><span class="line"><span class="function"><span class="title">cldr</span>: 35.1</span></span><br><span class="line"><span class="function"><span class="title">icu</span>: 64.2</span></span><br><span class="line"><span class="function"><span class="title">tz</span>: 2019<span class="title">a</span></span></span><br><span class="line"><span class="function"><span class="title">unicode</span>: 12.1</span></span><br></pre></td></tr></table></figure></li>
-<li>好了，既然安装好了，就开始搭建博客吧~ 先来初始化。这时候会下载一些相关的依赖包什么的（我喜欢用<code>CMD</code>的一个原因还有，它会显示安装进度，而我的<code>Git Bash</code>不会，当时输入安装命令后等了一会儿，<code>Git Bash</code>没反应，我还以为是我电脑卡住了，直接关了窗口重新打开）<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">hexo</span> <span class="title">init</span> <span class="title">Sky</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Cloning</span> <span class="title">hexo</span>-<span class="title">starter</span> <span class="title">https</span>://<span class="title">github.com</span>/<span class="title">hexojs</span>/<span class="title">hexo</span>-<span class="title">starter.git</span></span></span><br><span class="line"><span class="function"><span class="title">Cloning</span> <span class="title">into</span> '<span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>'...</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Enumerating</span> <span class="title">objects</span>: 22, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Counting</span> <span class="title">objects</span>: 100% (22/22), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Compressing</span> <span class="title">objects</span>: 100% (17/17), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Total</span> 153 (<span class="title">delta</span> 8), <span class="title">reused</span> 8 (<span class="title">delta</span> 3), <span class="title">pack</span>-<span class="title">reused</span> 131</span></span><br><span class="line"><span class="function"><span class="title">Receiving</span> <span class="title">objects</span>: 100% (153/153), 29.67 <span class="title">KiB</span> | 31.00 <span class="title">KiB</span>/<span class="title">s</span>, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Resolving</span> <span class="title">deltas</span>: 100% (70/70), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Submodule</span> '<span class="title">themes</span>/<span class="title">landscape</span>' (<span class="title">https</span>://<span class="title">github.com</span>/<span class="title">hexojs</span>/<span class="title">hexo</span>-<span class="title">theme</span>-<span class="title">landscape.git</span>) <span class="title">registered</span> <span class="title">for</span> <span class="title">path</span> '<span class="title">themes</span>/<span class="title">landscape</span>'</span></span><br><span class="line"><span class="function"><span class="title">Cloning</span> <span class="title">into</span> '<span class="title">C</span>:/<span class="title">Users</span>/<span class="title">work</span>/<span class="title">Blog</span>/<span class="title">Sky</span>/<span class="title">themes</span>/<span class="title">landscape</span>'...</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Enumerating</span> <span class="title">objects</span>: 32, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Counting</span> <span class="title">objects</span>: 100% (32/32), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Compressing</span> <span class="title">objects</span>: 100% (25/25), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Total</span> 1054 (<span class="title">delta</span> 20), <span class="title">reused</span> 10 (<span class="title">delta</span> 7), <span class="title">pack</span>-<span class="title">reused</span> 1022</span></span><br><span class="line"><span class="function"><span class="title">Receiving</span> <span class="title">objects</span>: 100% (1054/1054), 3.21 <span class="title">MiB</span> | 16.00 <span class="title">KiB</span>/<span class="title">s</span>, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Resolving</span> <span class="title">deltas</span>: 100% (578/578), <span class="title">done</span>.</span></span><br><span class="line"><span class="function">···</span></span><br><span class="line"><span class="function"><span class="title">added</span> 362 <span class="title">packages</span> <span class="title">from</span> 470 <span class="title">contributors</span> <span class="title">and</span> <span class="title">audited</span> 2622 <span class="title">packages</span> <span class="title">in</span> 90.323<span class="title">s</span></span></span><br><span class="line"><span class="function"><span class="title">found</span> 0 <span class="title">vulnerabilities</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Start</span> <span class="title">blogging</span> <span class="title">with</span> <span class="title">Hexo</span>!</span></span><br></pre></td></tr></table></figure>
-新建完成后，指定文件夹目录下应该有以下主要文件：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node_modules：依赖包</span><br><span class="line">scaffolds：生成文章的一些模板</span><br><span class="line">source：用来存放自己的文章</span><br><span class="line">themes：网站主题</span><br><span class="line">_config.yml：博客的配置文件	   </span><br></pre></td></tr></table></figure>
+<li>查看是否安装好<code>npm</code>和<code>node</code>，看到出现版本信息，证明安装好了。<pre><code class="CMD"> C:\Users\work\Blog&gt;node -v
+ v12.13.0
+ C:\Users\work\Blog&gt;npm -v
+ 6.12.0</code></pre>
+</li>
+<li>接着安装<code>Hexo</code>：<a href="https://hexo.io">Hexo官网</a>。如果可以直接在当前目录下右键打开 CMD，不行就打开<code>CMD</code>后<code>cd</code>到你的博客文件夹目录下，或者你安装了<code>Git</code>后也可以直接在目标文件夹下直接右键打开<code>Git Bash</code>。<pre><code class="bash"> npm install -g hexo-cil
+ npm install hexo-cil -g</code></pre>
+<pre><code class="CMD"> C:\Users\work\Blog&gt;npm install -g hexo-cil
+ npm ERR! code E404
+ npm ERR! 404 Not Found - GET https://registry.npmjs.org/hexo-cil - Not found
+ npm ERR! 404
+ npm ERR! 404  &#39;hexo-cil@latest&#39; is not in the npm registry.
+ npm ERR! 404 You should bug the author to publish it (or use the name yourself!)
+ npm ERR! 404
+ npm ERR! 404 Note that you can also install from a
+ npm ERR! 404 tarball, folder, http url, or git url.</code></pre>
 </li>
 </ol>
 </blockquote>
+<pre><code>npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\asus\AppData\Roaming\npm-cache\_logs\2019-11-02T11_39_50_447Z-debug.log     </code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;然后我输入` hexo -v `想看下是否安装了` hexo `，出现了问题
+``` CMD
+    C:\Users\work\Blog&gt;hexo -v
+    &#39;hexo&#39; 不是内部或外部命令，也不是可运行的程序
+    或批处理文件。</code></pre><blockquote>
+<p>&#8195;&#8195;我记得是安装过了的，因为原来搭建的博客有些地方有点问题，让我不太满意，我又找不到问题出在哪里，所以我是重新再搭建一个。所以我觉得出现这个问题很奇怪，我以为是我环境没配置好，所以又去看了下，觉得应该没有问题才对。然后我又在<code>Blog</code>文件夹打开<code>Git Bash</code>，输入如下命令查看，还是有问题。</p>
+</blockquote>
+<pre><code class="CMD">    asus@DESKTOP-58AL0J1 MINGW64 /c/Users/work/Blog (master)
+    $ hexo -v
+    bash: hexo: command not found</code></pre>
+<p>&#8195;&#8195;然后我又来试试看输入以下命令，发现可以了耶。（虽然我还是很纳闷，怎么上次搭建博客的时候<code>hexo -v</code>就能直接用，这次需要加上<code>npm</code></p>
+<pre><code class="CMD">    asus@DESKTOP-58AL0J1 MINGW64 /c/Users/work/Blog (master)
+    $ npm hexo -v
+    6.12.0 </code></pre>
+</blockquote>
+<pre><code>asus@DESKTOP-58AL0J1 MINGW64 /c/Users/work/Blog (master)
+$ npm hexo-cil -v
+6.12.0</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;然后我又屁颠屁颠跑去` CMD `命令窗口输入命令，果然，没问题了。(个人喜欢在` CMD `输入命令，因为可以` ctrl+c `,` ctrl+v `复制粘贴，在` Git Bash `复制粘贴要右键)
+``` CMD
+    C:\Users\work\Blog&gt;npm hexo -v
+    6.12.0</code></pre><p>&#8195;&#8195;然后接着输入（为什么这样就可以，咱也不懂，咱也不敢问，咱也不知道问谁</p>
+<pre><code class="CMD">    C:\Users\work\Blog&gt;npm install hexo --save
+    npm WARN saveError ENOENT: no such file or directory, open &#39;C:\Users\work\Blog\package.json&#39;
+    npm notice created a lockfile as package-lock.json. You should commit this file.
+    npm WARN enoent ENOENT: no such file or directory, open &#39;C:\Users\work\Blog\package.json&#39;
+    npm WARN Blog No description
+    npm WARN Blog No repository field.
+    npm WARN Blog No README data
+    npm WARN Blog No license field.
+    npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.1 (node_modules\fsevents):
+    npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.1: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)
+    npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules\nunjucks\node_modules\fsevents):
+    npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</code></pre>
+</blockquote>
+<pre><code>+ hexo@4.0.0
+added 287 packages from 438 contributors and audited 2458 packages in 72.541s
+found 0 vulnerabilities</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;然后再输入发现能用了耶。（其实我不知道这些命令的具体用途，瞎按就是了，能用就行，用多了或者就能总结出来了。不管黑猫白猫，抓到耗子的就是好猫。嘿嘿
+``` CMD
+    C:\Users\work\Blog&gt;hexo -v
+    hexo-cli: 3.1.0
+    os: Windows_NT 10.0.18362 win32 x64
+    node: 12.13.0
+    v8: 7.7.299.13-node.12
+    uv: 1.32.0
+    zlib: 1.2.11
+    brotli: 1.0.7
+    ares: 1.15.0
+    modules: 72
+    nghttp2: 1.39.2
+    napi: 5
+    llhttp: 1.1.4
+    http_parser: 2.8.0
+    openssl: 1.1.1d
+    cldr: 35.1
+    icu: 64.2
+    tz: 2019a
+    unicode: 12.1</code></pre><ol start="4">
+<li>好了，既然安装好了，就开始搭建博客吧~ 先来初始化。这时候会下载一些相关的依赖包什么的（我喜欢用<code>CMD</code>的一个原因还有，它会显示安装进度，而我的<code>Git Bash</code>不会，当时输入安装命令后等了一会儿，<code>Git Bash</code>没反应，我还以为是我电脑卡住了，直接关了窗口重新打开）<pre><code class="CMD"> C:\Users\work\Blog&gt;hexo init Sky
+ INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git
+ Cloning into &#39;C:\Users\work\Blog\Sky&#39;...
+ remote: Enumerating objects: 22, done.
+ remote: Counting objects: 100% (22/22), done.
+ remote: Compressing objects: 100% (17/17), done.
+ remote: Total 153 (delta 8), reused 8 (delta 3), pack-reused 131
+ Receiving objects: 100% (153/153), 29.67 KiB | 31.00 KiB/s, done.
+ Resolving deltas: 100% (70/70), done.
+ Submodule &#39;themes/landscape&#39; (https://github.com/hexojs/hexo-theme-landscape.git) registered for path &#39;themes/landscape&#39;
+ Cloning into &#39;C:/Users/work/Blog/Sky/themes/landscape&#39;...
+ remote: Enumerating objects: 32, done.
+ remote: Counting objects: 100% (32/32), done.
+ remote: Compressing objects: 100% (25/25), done.
+ remote: Total 1054 (delta 20), reused 10 (delta 7), pack-reused 1022
+ Receiving objects: 100% (1054/1054), 3.21 MiB | 16.00 KiB/s, done.
+ Resolving deltas: 100% (578/578), done.
+ ···
+ added 362 packages from 470 contributors and audited 2622 packages in 90.323s
+ found 0 vulnerabilities</code></pre>
+</li>
+</ol>
+</blockquote>
+<pre><code>INFO  Start blogging with Hexo!</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;新建完成后，指定文件夹目录下应该有以下主要文件：
+``` bash
+    node_modules：依赖包
+    scaffolds：生成文章的一些模板
+    source：用来存放自己的文章
+    themes：网站主题
+    _config.yml：博客的配置文件       </code></pre></blockquote>
 <ul>
 <li><h4 id="生成静态文件吧"><a href="#生成静态文件吧" class="headerlink" title="生成静态文件吧~"></a>生成静态文件吧~</h4></li>
 </ul>
 <blockquote>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>&gt;<span class="title">cd</span> <span class="title">Sky</span></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">g</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Start</span> <span class="title">processing</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Files</span> <span class="title">loaded</span> <span class="title">in</span> 169 <span class="title">ms</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Generated</span>: <span class="title">index.html</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Generated</span>: <span class="title">archives</span>/<span class="title">index.html</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Generated</span>: <span class="title">fancybox</span>/<span class="title">jquery.fancybox.css</span> 	</span></span><br><span class="line"><span class="function">···</span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Generated</span>: <span class="title">css</span>/<span class="title">images</span>/<span class="title">banner.jpg</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Generated</span>: 2019/11/02/<span class="title">hello</span>-<span class="title">world</span>/<span class="title">index.html</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  28 <span class="title">files</span> <span class="title">generated</span> <span class="title">in</span> 623 <span class="title">ms</span>   </span></span><br></pre></td></tr></table></figure>
+<pre><code class="CMD">    C:\Users\work\Blog&gt;cd Sky
+    C:\Users\work\Blog\Sky&gt;hexo g
+    INFO  Start processing
+    INFO  Files loaded in 169 ms
+    INFO  Generated: index.html
+    INFO  Generated: archives/index.html
+    INFO  Generated: fancybox/jquery.fancybox.css     
+    ···
+    INFO  Generated: css/images/banner.jpg
+    INFO  Generated: 2019/11/02/hello-world/index.html
+    INFO  28 files generated in 623 ms   </code></pre>
 </blockquote>
 <ul>
 <li><h4 id="启动服务器吧"><a href="#启动服务器吧" class="headerlink" title="启动服务器吧~"></a>启动服务器吧~</h4></li>
 </ul>
 <blockquote>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">s</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Start</span> <span class="title">processing</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Hexo</span> <span class="title">is</span> <span class="title">running</span> <span class="title">at</span> <span class="title">http</span>://<span class="title">localhost</span>:4000 . <span class="title">Press</span> <span class="title">Ctrl</span>+<span class="title">C</span> <span class="title">to</span> <span class="title">stop</span>.</span></span><br></pre></td></tr></table></figure>
-<p>然后在网址栏输入<code>http://localhost:4000</code>就可以看到你的博客了~   </p>
+<pre><code class="CMD">    C:\Users\work\Blog\Sky&gt;hexo s
+    INFO  Start processing
+    INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></pre>
+<p>&#8195;&#8195;然后在网址栏输入<code>http://localhost:4000</code>就可以看到你的博客了~   </p>
 </blockquote>
 <ul>
 <li><h4 id="换自己喜欢的主题"><a href="#换自己喜欢的主题" class="headerlink" title="换自己喜欢的主题~"></a>换自己喜欢的主题~</h4></li>
 </ul>
 <blockquote>
-<p>看到很多人推荐使用<code>Next</code>主题，刚好我也喜欢这种风格的，然后我就想换种主题风格，所以接着下载喜欢的主题~       </p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>\<span class="title">themes</span>&gt;<span class="title">git</span> <span class="title">clone</span> <span class="title">https</span>://<span class="title">github.com</span>/<span class="title">theme</span>-<span class="title">next</span>/<span class="title">hexo</span>-<span class="title">theme</span>-<span class="title">next.git</span> <span class="title">themes</span>/<span class="title">next</span></span></span><br><span class="line"><span class="function"><span class="title">Cloning</span> <span class="title">into</span> '<span class="title">themes</span>/<span class="title">next</span>'...</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Enumerating</span> <span class="title">objects</span>: 24, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Counting</span> <span class="title">objects</span>: 100% (24/24), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Compressing</span> <span class="title">objects</span>: 100% (19/19), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Receiving</span> <span class="title">objects</span>: 100% (10772/10772), 6.42 <span class="title">MiB</span> | 17.00 <span class="title">KiB</span>/<span class="title">s</span>, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Resolving</span> <span class="title">deltas</span>: 100% (7037/7037), <span class="title">done</span>. 	   </span></span><br></pre></td></tr></table></figure>
+<p>&#8195;&#8195;看到很多人推荐使用<code>Next</code>主题，刚好我也喜欢这种风格的，然后我就想换种主题风格，所以接着下载喜欢的主题~       </p>
+<pre><code class="CMD">    C:\Users\work\Blog\Sky\themes&gt;git clone https://github.com/theme-next/hexo-theme-next.git themes/next
+    Cloning into &#39;themes/next&#39;...
+    remote: Enumerating objects: 24, done.
+    remote: Counting objects: 100% (24/24), done.
+    remote: Compressing objects: 100% (19/19), done.
+    Receiving objects: 100% (10772/10772), 6.42 MiB | 17.00 KiB/s, done.
+    Resolving deltas: 100% (7037/7037), done.        </code></pre>
 </blockquote>
 <ul>
 <li><h4 id="接着将博客改造成自己喜欢的逼格吧"><a href="#接着将博客改造成自己喜欢的逼格吧" class="headerlink" title="接着将博客改造成自己喜欢的逼格吧~"></a>接着将博客改造成自己喜欢的逼格吧~</h4></li>
 </ul>
 <blockquote>
-<p>  打开<code>C:\Users\work\Blog\Sky\themes\next</code>目录下的<code>_config.yml</code>文件<br>  我将文件的如下内容进行了修改, 你可以按照自己的爱好修改, 看不懂百度上有很多对每个模块内容的解说, 自己搜：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">favicon:</span> <span class="string">//图标我是自己做好放在该目录下的`</span> <span class="string">images</span> <span class="string">`文件夹里的</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/青山16-16.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/青山32-32.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/阿狸32-32.ico</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/阿狸-32-32.ico</span></span><br><span class="line"> </span><br><span class="line"> <span class="attr">icon:</span> <span class="string">//页面最底下的人物颜色</span></span><br><span class="line">    <span class="attr">color:</span> <span class="string">"#036485"</span></span><br><span class="line"><span class="comment"># Schemes //更换主题</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></span><br><span class="line"><span class="attr">menu:</span> <span class="string">//增加标签和分类按钮</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">avatar:</span> <span class="string">//增加头像并使之椭圆、旋转</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/阿狸头像.png</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">true</span> </span><br><span class="line"><span class="attr">social:</span> <span class="string">//社交链接</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/Kiddy-Sky</span> <span class="string">||</span> <span class="string">github</span></span><br><span class="line"><span class="attr">auto_excerpt:</span> <span class="string">//显示文章摘要</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">symbols_count_time:</span> <span class="string">//显示文本总数</span></span><br><span class="line">   <span class="string">item_text_total</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">true</span> <span class="string">//显示标签图标</span></span><br><span class="line"><span class="attr">mobile_layout_economy:</span> <span class="literal">true</span> <span class="string">//手机端</span></span><br><span class="line"><span class="attr">codeblock:</span> <span class="string">代码块</span></span><br><span class="line">  <span class="attr">highlight_theme:</span> <span class="string">night</span> <span class="string">bright</span> </span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">show_result:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">default</span>  </span><br><span class="line"><span class="attr">back2top:</span> <span class="string">//返回开头按钮</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="string">ture</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">reading_progress:</span> <span class="string">//阅读进度</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">position:</span> <span class="string">top</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#003636"</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">2px</span>  </span><br><span class="line"><span class="attr">bookmark:</span> <span class="string">//书签</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="string">ture</span></span><br><span class="line"><span class="attr">github_banner:</span> <span class="string">//右上角的</span> <span class="string">GitHub</span> <span class="string">图案</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="string">ture</span></span><br><span class="line">  <span class="attr">permalink:</span> <span class="string">https://github.com/Kiddy-Sky</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Follow</span> <span class="string">me</span> <span class="string">on</span> <span class="string">GitHub</span></span><br><span class="line"><span class="attr">busuanzi_count:</span> <span class="string">//底下的统计</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="string">ture</span></span><br><span class="line"><span class="string">//搜索</span></span><br><span class="line"><span class="attr">algolia_search:</span></span><br><span class="line">    <span class="attr">per_page:</span> <span class="number">9</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="string">ture</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">5</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="string">ture</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="string">ture</span></span><br><span class="line"><span class="attr">canvas_nest:</span> <span class="string">//动态背景</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="string">ture</span></span><br><span class="line">  <span class="attr">onmobile:</span> <span class="literal">true</span> </span><br><span class="line">  <span class="attr">color:</span> <span class="string">"0,51,102"</span> </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.3</span> <span class="comment"># The opacity of line: 0~1	</span></span><br></pre></td></tr></table></figure>
-<p>其他的修改自己挖掘吧，除此之外我还增加了一些自己喜欢的内容，按照自己的兴趣修改吧，不懂就百度看一下别人是怎么改的，依葫芦画瓢就 OK 啦<del>实在不行就修改后看看页面哪里发生了变化就知道修改的是什么啦</del></p>
+<p>&#8195;&#8195;打开<code>C:\Users\work\Blog\Sky\themes\next</code>目录下的<code>_config.yml</code>文件<br>&#8195;&#8195;我将文件的如下内容进行了修改, 你可以按照自己的爱好修改, 看不懂百度上有很多对每个模块内容的解说, 自己搜：</p>
+<pre><code class="yml">    favicon: //图标我是自己做好放在该目录下的` images `文件夹里的
+      small: /images/青山16-16.ico
+      medium: /images/青山32-32.ico
+      apple_touch_icon: /images/阿狸32-32.ico
+      safari_pinned_tab: /images/阿狸-32-32.ico</code></pre>
 </blockquote>
+<pre><code> icon: //页面最底下的人物颜色
+    color: &quot;#036485&quot;
+
+# Schemes //更换主题
+scheme: Pisces
+
+menu: //增加标签和分类按钮
+  tags: /tags/ || tags
+  categories: /categories/ || th
+
+avatar: //增加头像并使之椭圆、旋转
+  url: /images/阿狸头像.png
+  rounded: true
+  rotated: true 
+
+social: //社交链接
+  GitHub: https://github.com/Kiddy-Sky || github
+
+auto_excerpt: //显示文章摘要
+  enable: true
+
+symbols_count_time: //显示文本总数
+   item_text_total
+
+tag_icon: true //显示标签图标
+
+mobile_layout_economy: true //手机端
+
+codeblock: 代码块
+  highlight_theme: night bright 
+  copy_button:
+    enable: true
+    show_result: true
+    style: default  
+
+back2top: //返回开头按钮
+  enable: true
+  sidebar: ture
+  scrollpercent: true
+
+reading_progress: //阅读进度
+  enable: false
+  position: top
+  color: &quot;#003636&quot;
+  height: 2px  
+
+bookmark: //书签
+  enable: ture
+
+github_banner: //右上角的 GitHub 图案
+  enable: ture
+  permalink: https://github.com/Kiddy-Sky
+  title: Follow me on GitHub
+
+busuanzi_count: //底下的统计
+  enable: ture
+
+//搜索
+algolia_search:
+    per_page: 9
+
+local_search:
+  enable: ture
+  top_n_per_article: 5
+  unescape: ture
+  preload: ture
+
+canvas_nest: //动态背景
+  enable: ture
+  onmobile: true 
+  color: &quot;0,51,102&quot; 
+  opacity: 0.3 # The opacity of line: 0~1    </code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;其他的修改自己挖掘吧，除此之外我还增加了一些自己喜欢的内容，按照自己的兴趣修改吧，不懂就百度看一下别人是怎么改的，依葫芦画瓢就 OK 啦~实在不行就修改后看看页面哪里发生了变化就知道修改的是什么啦~</code></pre></blockquote>
 <ul>
 <li><h4 id="准备将本地改造好的博客部署到GitHub上吧-这样就能用网址访问啦"><a href="#准备将本地改造好的博客部署到GitHub上吧-这样就能用网址访问啦" class="headerlink" title="准备将本地改造好的博客部署到GitHub上吧~ 这样就能用网址访问啦~"></a>准备将本地改造好的博客部署到<code>GitHub</code>上吧~ 这样就能用网址访问啦~</h4></li>
 </ul>
 <blockquote>
-<p>部署到<code>GitHub</code>之前先修改<code>C:\Users\work\Blog\Sky</code>目录下的<code>_config.yml</code>文件，修改成自己的信息才能成功将本地博客部署到自己的博客上。以下以我的为例：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span>  <span class="string">//使用的主题，下载有的就可以用</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git</span> <span class="string">//修改成自己的</span> <span class="string">GitHub</span> <span class="string">博客仓库就行了</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>其他的修改自己看说明或者百度~</p>
-<p>将本地改造好的博客部署到<code>GitHub</code>上吧~ 这样就能用网址访问啦~</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">d</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Deploying</span>: <span class="title">git</span></span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Clearing</span> .<span class="title">deploy_git</span> <span class="title">folder</span>...</span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Copying</span> <span class="title">files</span> <span class="title">from</span> <span class="title">public</span> <span class="title">folder</span>...</span></span><br><span class="line"><span class="function"><span class="title">INFO</span>  <span class="title">Copying</span> <span class="title">files</span> <span class="title">from</span> <span class="title">extend</span> <span class="title">dirs</span>...</span></span><br><span class="line"><span class="function"><span class="title">warning</span>: <span class="title">LF</span> <span class="title">will</span> <span class="title">be</span> <span class="title">replaced</span> <span class="title">by</span> <span class="title">CRLF</span> <span class="title">in</span> 2019/10/10/<span class="title">about</span>-<span class="title">git</span>/<span class="title">index.html</span>.</span></span><br><span class="line"><span class="function"><span class="title">The</span> <span class="title">file</span> <span class="title">will</span> <span class="title">have</span> <span class="title">its</span> <span class="title">original</span> <span class="title">line</span> <span class="title">endings</span> <span class="title">in</span> <span class="title">your</span> <span class="title">working</span> <span class="title">directory</span></span></span><br><span class="line"><span class="function"><span class="title">warning</span>: <span class="title">LF</span> <span class="title">will</span> <span class="title">be</span> <span class="title">replaced</span> <span class="title">by</span> <span class="title">CRLF</span> <span class="title">in</span> 2019/11/01/<span class="title">build</span>-<span class="title">my</span>-<span class="title">blog</span>/<span class="title">index.html</span>.</span></span><br><span class="line"><span class="function"><span class="title">The</span> <span class="title">file</span> <span class="title">will</span> <span class="title">have</span> <span class="title">its</span> <span class="title">original</span> <span class="title">line</span> <span class="title">endings</span> <span class="title">in</span> <span class="title">your</span> <span class="title">working</span> <span class="title">directory</span></span></span><br><span class="line"><span class="function"><span class="title">warning</span>: <span class="title">LF</span> <span class="title">will</span> <span class="title">be</span> <span class="title">replaced</span> <span class="title">by</span> <span class="title">CRLF</span> <span class="title">in</span> 2019/11/02/<span class="title">hello</span>-<span class="title">world</span>/<span class="title">index.html</span>.</span></span><br><span class="line"><span class="function">...//省略部分内容</span></span><br><span class="line"><span class="function"><span class="title">Counting</span> <span class="title">objects</span>: 100% (82/82), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Delta</span> <span class="title">compression</span> <span class="title">using</span> <span class="title">up</span> <span class="title">to</span> 4 <span class="title">threads</span></span></span><br><span class="line"><span class="function"><span class="title">Compressing</span> <span class="title">objects</span>: 100% (26/26), <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Writing</span> <span class="title">objects</span>: 100% (42/42), 3.14 <span class="title">KiB</span> | 229.00 <span class="title">KiB</span>/<span class="title">s</span>, <span class="title">done</span>.</span></span><br><span class="line"><span class="function"><span class="title">Total</span> 42 (<span class="title">delta</span> 18), <span class="title">reused</span> 0 (<span class="title">delta</span> 0)</span></span><br><span class="line"><span class="function"><span class="title">remote</span>: <span class="title">Resolving</span> <span class="title">deltas</span>: 100% (18/18), <span class="title">completed</span> <span class="title">with</span> 17 <span class="title">local</span> <span class="title">objects</span>.</span></span><br><span class="line"><span class="function"><span class="title">To</span> <span class="title">https</span>://<span class="title">github.com</span>/<span class="title">Kiddy</span>-<span class="title">Sky</span>/<span class="title">Kiddy</span>-<span class="title">Sky.github.io.git</span></span></span><br><span class="line"><span class="function">   <span class="title">dd4babe</span>..<span class="title">c4a65dc</span>  <span class="title">HEAD</span> -&gt; <span class="title">master</span></span></span><br><span class="line"><span class="function"><span class="title">Branch</span> '<span class="title">master</span>' <span class="title">set</span> <span class="title">up</span> <span class="title">to</span> <span class="title">track</span> <span class="title">remote</span> <span class="title">branch</span> '<span class="title">master</span>' <span class="title">from</span> '<span class="title">https</span>://<span class="title">github.com</span>/<span class="title">Kiddy</span>-<span class="title">Sky</span>/<span class="title">Kiddy</span>-<span class="title">Sky.github.io.git</span>'.</span></span><br><span class="line"><span class="function">[32<span class="title">mINFO</span> [39<span class="title">m</span> <span class="title">Deploy</span> <span class="title">done</span>: [35<span class="title">mgit</span>[39<span class="title">m</span></span></span><br></pre></td></tr></table></figure>
-<p>将本地改造好的博客部署到<code>GitHub</code>上后，试试用网址访问吧~</p>
+<p>&#8195;&#8195;部署到<code>GitHub</code>之前先修改<code>C:\Users\work\Blog\Sky</code>目录下的<code>_config.yml</code>文件，修改成自己的信息才能成功将本地博客部署到自己的博客上。以下以我的为例：</p>
+<pre><code class="yml">    # Extensions
+    ## Plugins: https://hexo.io/plugins/
+    ## Themes: https://hexo.io/themes/
+    theme: next  //使用的主题，下载有的就可以用</code></pre>
+</blockquote>
+<pre><code># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git //修改成自己的 GitHub 博客仓库就行了
+  branch: master</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;其他的修改自己看说明或者百度~
+
+&amp;#8195;&amp;#8195;将本地改造好的博客部署到` GitHub `上吧~ 这样就能用网址访问啦~
+
+``` CMD
+    C:\Users\work\Blog\Sky&gt;hexo d
+    INFO  Deploying: git
+    INFO  Clearing .deploy_git folder...
+    INFO  Copying files from public folder...
+    INFO  Copying files from extend dirs...
+    warning: LF will be replaced by CRLF in 2019/10/10/about-git/index.html.
+    The file will have its original line endings in your working directory
+    warning: LF will be replaced by CRLF in 2019/11/01/build-my-blog/index.html.
+    The file will have its original line endings in your working directory
+    warning: LF will be replaced by CRLF in 2019/11/02/hello-world/index.html.
+    ...//省略部分内容
+    Counting objects: 100% (82/82), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (26/26), done.
+    Writing objects: 100% (42/42), 3.14 KiB | 229.00 KiB/s, done.
+    Total 42 (delta 18), reused 0 (delta 0)
+    remote: Resolving deltas: 100% (18/18), completed with 17 local objects.
+    To https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git
+       dd4babe..c4a65dc  HEAD -&gt; master
+    Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git&#39;.
+    [32mINFO [39m Deploy done: [35mgit[39m</code></pre><p>&#8195;&#8195;将本地改造好的博客部署到<code>GitHub</code>上后，试试用网址访问吧~</p>
 </blockquote>
 <ul>
-<li><h3 id="提示：修改文章后需要先hexo-c-清除-public目录下文件再hexo-g重新生成静态文件后再hexo-d部署到-GitHub-上，不然文章的内容可能和你预想中的不一样哦"><a href="#提示：修改文章后需要先hexo-c-清除-public目录下文件再hexo-g重新生成静态文件后再hexo-d部署到-GitHub-上，不然文章的内容可能和你预想中的不一样哦" class="headerlink" title="提示：修改文章后需要先hexo c 清除 public目录下文件再hexo g重新生成静态文件后再hexo d部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~"></a>提示：修改文章后需要先<code>hexo c</code> 清除 <code>public</code>目录下文件再<code>hexo g</code>重新生成静态文件后再<code>hexo d</code>部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~</h3><blockquote>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">clean</span> #清除 <span class="title">public</span> 目录下文件</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">g</span>     #生成静态文件</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">s</span>     #网页效果查看</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">work</span>\<span class="title">Blog</span>\<span class="title">Sky</span>&gt;<span class="title">hexo</span> <span class="title">d</span>     #部署到 <span class="title">GitHub</span> </span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
+<li><h4 id="提示：修改文章后需要先hexo-c-清除-public目录下文件再hexo-g重新生成静态文件后再hexo-d部署到-GitHub-上，不然文章的内容可能和你预想中的不一样哦"><a href="#提示：修改文章后需要先hexo-c-清除-public目录下文件再hexo-g重新生成静态文件后再hexo-d部署到-GitHub-上，不然文章的内容可能和你预想中的不一样哦" class="headerlink" title="提示：修改文章后需要先hexo c 清除 public目录下文件再hexo g重新生成静态文件后再hexo d部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~"></a>提示：修改文章后需要先<code>hexo c</code> 清除 <code>public</code>目录下文件再<code>hexo g</code>重新生成静态文件后再<code>hexo d</code>部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~</h4></li>
 </ul>
+<blockquote>
+<pre><code class="CMD">    C:\Users\work\Blog\Sky&gt;hexo clean #清除 public 目录下文件
+    C:\Users\work\Blog\Sky&gt;hexo g     #生成静态文件
+    C:\Users\work\Blog\Sky&gt;hexo s     #网页效果查看
+    C:\Users\work\Blog\Sky&gt;hexo d     #部署到 GitHub </code></pre>
+</blockquote>
 ]]></content>
       <categories>
         <category>无头苍蝇</category>
@@ -171,6 +400,177 @@ sudo mount -t vboxsf VBshare /home/QYT/share # VBshare：前面设置的共享�
         <tag>Hexo</tag>
         <tag>GitHub</tag>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一步：安装虚拟机</title>
+    <url>/2021/04/21/1-install/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&#8195;&#8195;为了保护自己的电脑，不至于折腾崩了，选择在<code>virtualbox</code>虚拟机中装一个虚拟的<code>Linux</code>系统，然后在 Linux 中装一个<code>Bochs</code>虚拟机来模拟硬件。</p>
+<span id="more"></span>
+
+<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h3><p>&#8195;&#8195;<code>virtualbox</code>可以在<a href="http://download.virtualbox.org/virtualbox">官网</a>选择一个合适的版本下载安装。<br>&#8195;&#8195;<code>centos</code>可以在<a href="https://www.centos.org/download/">官网</a>选择一个合适的版本下载安装, 若想和书中版本一样的，可以去<a href="http://vault.centos.org">这里</a>下载安装。我选择<a href="http://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">镜像</a>下载<code>CentOS-7-x86_64-DVD-2009.iso</code>版本的。</p>
+<h3 id="2-安装虚拟的-Linux-系统过程"><a href="#2-安装虚拟的-Linux-系统过程" class="headerlink" title="2.安装虚拟的 Linux 系统过程"></a>2.安装虚拟的 Linux 系统过程</h3><p>&#8195;&#8195;安装 virtualbox 没什么可说的。在 virtualbox 中安装 centos 稍微麻烦了一点。</p>
+<h4 id="在-virtualbox-选择新建"><a href="#在-virtualbox-选择新建" class="headerlink" title="在 virtualbox 选择新建"></a>在 virtualbox 选择<code>新建</code></h4><p><img src="/2021/04/21/1-install/1_new-built.png" alt="新建" title="new-built"> </p>
+<h4 id="然后配置"><a href="#然后配置" class="headerlink" title="然后配置"></a>然后配置</h4><p>&#8195;&#8195;选择存储 -&gt; 点击光盘 -&gt; 选择一个虚拟光盘 -&gt; 选择下载好的<code>CentOS-7-x86_64-DVD-2009.iso</code><br><img src="/2021/04/21/1-install/1_configure_mem.png" alt="配置存储" title="configure"> </p>
+<p>&#8195;&#8195;选择系统 -&gt; 将启动顺序的<code>光驱</code>移到第一位。<br><img src="/2021/04/21/1-install/1_configure_sys.png" alt="配置系统" title="configure"> </p>
+<p>&#8195;&#8195;其他配置：共享粘贴板(常规-&gt;高级)、网络、共享文件夹。也可以后面再配置，可以先熟悉一下位置。<br><img src="/2021/04/21/1-install/1_configure_net.png" alt="常规配置" title="configure"></p>
+<p><img src="/2021/04/21/1-install/1_configure_share.png" alt="配置共享文件夹" title="configure"></p>
+<h4 id="在-virtualbox-选择新创建好的虚拟机，点击启动，进入安装界面"><a href="#在-virtualbox-选择新创建好的虚拟机，点击启动，进入安装界面" class="headerlink" title="在 virtualbox 选择新创建好的虚拟机，点击启动，进入安装界面"></a>在 virtualbox 选择新创建好的虚拟机，点击<code>启动</code>，进入安装界面</h4><p><img src="/2021/04/21/1-install/1_install_1.png" alt="启动安装" title="install"></p>
+<h5 id="注意：Right-Ctrl-是指右边的-Ctrl-键。可以切换鼠标在虚拟机外还是虚拟机内。"><a href="#注意：Right-Ctrl-是指右边的-Ctrl-键。可以切换鼠标在虚拟机外还是虚拟机内。" class="headerlink" title="注意：Right Ctrl 是指右边的 Ctrl 键。可以切换鼠标在虚拟机外还是虚拟机内。"></a><strong>注意：<code>Right Ctrl</code> 是指右边的 Ctrl 键。可以切换鼠标在虚拟机外还是虚拟机内。</strong></h5><p>&#8195;&#8195;根据自己的需要选择安装的软件，我安装的是有桌面的。<br><img src="/2021/04/21/1-install/1_install_desktop.png" alt="选择软件" title="desktop"> </p>
+<p>&#8195;&#8195;选择完需要安装的软件后，接着选择安装的位置。如果空间足够，可以直接选择自动创建分区，也可以自己创建分区。<br>&#8195;&#8195;选择<code>我要配置分区</code>后，点击左上角的<code>完成</code>就会进入手动分区界面。<br>&#8195;&#8195;我安装的时候空闲空间只有 990MB 左右，根本不够安装桌面版的。所以选择了自己创建分区，然后发现已经有自动创建好的分区了，可能是之前安装的时候创建的，但是当时我安装到重启的时候异常退出了，再启动又是重新安装，所以是存在的分区是原来自动创建的分区。<br>&#8195;&#8195;因为原来创建的我也没用过，又不能修改，所以我就直接删掉（左下角<code>-</code>号），然后自己重新创建分区，这样就有足够空闲的空间可以用了。<br><img src="/2021/04/21/1-install/1_install_location.png" alt="选择安装位置" title="location"> </p>
+<p>&#8195;&#8195;分区创建好之后点击左上角的完成，会出现如下提示：点击右下角的<code>接受更改</code>即可。<br><img src="/2021/04/21/1-install/1_install_accept.png" alt="接受更改" title="accept"> </p>
+<p>&#8195;&#8195;点击<code>开始安装</code>：<br><img src="/2021/04/21/1-install/1_install_2.png" alt="开始安装" title="install"> </p>
+<p>&#8195;&#8195;等待安装的过程中根据需要顺便把以下 配置 配置好：<br><img src="/2021/04/21/1-install/1_install_wait.png" alt="等待安装" title="wait"> </p>
+<h4 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h4><p><img src="/2021/04/21/1-install/1_install_restart.png" alt="重启" title="restart"> </p>
+<p>&#8195;&#8195;我每次都是重启的时候异常退出，崩了就重新安装，安装了好几次才成功。<br>&#8195;&#8195;一次重启后异常退出后，我把启动顺序中硬盘移到第一位：<br><img src="/2021/04/21/1-install/1_install_sequence.png" alt="启动顺序" title="sequence"></p>
+<p>&#8195;&#8195;然后选择并启动：<br><img src="/2021/04/21/1-install/1_install_rstart.png" alt="启动" title="rstart"></p>
+<p>&#8195;&#8195;接受许可协议并顺便把网络配置好：<br><img src="/2021/04/21/1-install/1_install_raccept.png" alt="启动" title="raccept"></p>
+<p>&#8195;&#8195;配置好后点击<code>完成配置</code>。我一开始每次点击完成配置后，又会异常退出。再次启动总会进入接受许可协议的界面。像是进入了一个死循环。直到有一次，我<code>ctrl+f</code>切换到全屏，再点击<code>完成配置</code>，这才成功进入（泪奔~）：<br><img src="/2021/04/21/1-install/1_install_rfinish.png" alt="启动" title="rfinish"></p>
+<p><img src="/2021/04/21/1-install/1_gnome.png" alt="完成" title="finish"></p>
+<h3 id="3-安装增强功能"><a href="#3-安装增强功能" class="headerlink" title="3.安装增强功能"></a>3.安装增强功能</h3><p>&#8195;&#8195;安装增强功能后就能共享粘贴板了，共享文件夹也能用了，鼠标移动也能方便自如了。<br>&#8195;&#8195;设备 -&gt; 安装增强功能。 这时候桌面会出现一个光盘，打开光盘，然后打开终端运行<code>VBoxLinuxAdditions.run</code>程序。<br><img src="/2021/04/21/1-install/1_install_vbop.png" alt="增强功能" title="vbop"></p>
+<p>&#8195;&#8195;输入以下命令后等待运行结束：</p>
+<pre><code class="bash">    sudo ./VBoxLinuxAdditions.run</code></pre>
+<p>&#8195;&#8195;配置：设备 -&gt; 共享粘贴板 -&gt; 双向； 设备 -&gt; 共享文件夹 -&gt; VBshare 。如果没有生效就重启一遍就好了。</p>
+<h3 id="4-配置共享文件夹"><a href="#4-配置共享文件夹" class="headerlink" title="4.配置共享文件夹"></a>4.配置共享文件夹</h3><pre><code class="bash">    mkdir ~/share  # 新建文件夹，用来存放访问共享文件夹的内容
+
+    # VBshare：前面设置的共享文件夹的名字，
+    # ~/share：在Linux 中访问共享文件夹内容的文件夹路径
+    sudo mount -t vboxsf VBshare ~/share </code></pre>
+<h3 id="5-安装-Bochs-虚拟机模拟硬件"><a href="#5-安装-Bochs-虚拟机模拟硬件" class="headerlink" title="5.安装 Bochs 虚拟机模拟硬件"></a>5.安装 Bochs 虚拟机模拟硬件</h3><h4 id="下载-Bochs-。"><a href="#下载-Bochs-。" class="headerlink" title="下载 Bochs 。"></a>下载<a href="https://sourceforge.net/projects/bochs/files/bochs/2.6.2/bochs-2.6.2.tar.gz/download"> <code>Bochs</code> </a>。</h4><p>&#8195;&#8195;我用浏览器自带的下载工具下载太慢了，用迅雷下载就很快。下载后解压到共享文件夹，然后复制到 Linux 系统中，毕竟还是原来的操作系统用得更加方便顺溜。不过要是想要体验用 Linux 终端解压，也不是不行。<br>&#8195;&#8195;我将解压后的 bochs-2.6.2 放进了~/OS 中。</p>
+<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><pre><code class="bash">    cd ~/OS/bochs-2.6.2
+    # 然后直接复制下面这几行代码进去：其中 /home/QYT 不能用 ~ 代替
+    ./configure \
+    --prefix=/home/QYT/OS/bochs \ 
+    --enable-debugger \
+    --enable-disasm \
+    --enable-iodebug \
+    --enable-x86-debugger \
+    --with-x \
+    --with-x11</code></pre>
+<p><img src="/2021/04/21/1-install/1_install_bochs_compile.png" alt="编译" title="compile"></p>
+<p>&#8195;&#8195;若是出现如下报错：<br><img src="/2021/04/21/1-install/1_install_bochs_error1.png" alt="报错" title="error"></p>
+<p>&#8195;&#8195;检查发现缺少<code>gtk</code>库（在usr/include文件夹内没有 gtk 的文件夹），先检查网络（点击右上角喇叭和电池的标志查看），确保网络连接后才能进行安装：</p>
+<pre><code class="bash">    sudo yum install gtk2 gtk2-devel gtk2-devel-docs
+    sudo make</code></pre>
+<p>&#8195;&#8195;如果安装 gtk 后还是提示这个错误，说明没链接到库，可在报错的位置手动编译，并在编译前后分别加上<code>` pkg-config --cflags gtk+-2.0 `</code>和<code>` pkg-config --libs --cflags gtk+-2.0 `</code> (包括反引号<code>`</code>！！！)。如：</p>
+<pre><code class="bash">    cd gui
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     keymap.cc -o keymap.o `pkg-config --libs --cflags gtk+-2.0`
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     gui.cc -o gui.o `pkg-config --libs --cflags gtk+-2.0`
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     siminterface.cc -o siminterface.o `pkg-config --libs --cflags gtk+-2.0`
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     paramtree.cc -o paramtree.o `pkg-config --libs --cflags gtk+-2.0`
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     textconfig.cc -o textconfig.o `pkg-config --libs --cflags gtk+-2.0`
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     enh_dbg.cc -o enh_dbg.o `pkg-config --libs --cflags gtk+-2.0`
+    g++ -c  `pkg-config --cflags gtk+-2.0` -I.. -I./.. -I../iodev -I./../iodev -I../instrument/stubs -I./../instrument/stubs -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES     gtk_enh_dbg_osdep.cc -o gtk_enh_dbg_osdep.o `pkg-config --libs --cflags gtk+-2.0`</code></pre>
+<p>&#8195;&#8195;哪里提示有类似这样链接不到库的就在哪里手动编译。<br>&#8195;&#8195;如果之前安装失败，还有可能出现如下错误：<br><img src="/2021/04/21/1-install/1_install_bochs_error2.png" alt="报错" title="error"> </p>
+<p>&#8195;&#8195;左键双击打开<code>bochs-2.6.2</code>里的<code>Makefile</code>文件，点击跳转到行后输入<code>92</code>，按下回车键，光标就会定位到第 92 行。在下面的语句后面加上<code>-lpthread</code>。然后接着编译。<br><img src="/2021/04/21/1-install/1_install_bochs_makefile.png" alt="修改文件" title="error"> </p>
+<pre><code class="bash">    sudo make</code></pre>
+<p>&#8195;&#8195;如果加上<code>-lpthread</code>后手动链接还出现链接库的问题，可以把编译出来的文件全部清除后重新开始编译：</p>
+<pre><code class="bash">    sudo make dist-clean</code></pre>
+<p>&#8195;&#8195;<a href="#编译">需要重新编译点击这里定位到<code>编译</code>部分内容</a>。如果没有问题就接着:</p>
+<pre><code class="bash">    make install</code></pre>
+<h3 id="6-启动-Bochs"><a href="#6-启动-Bochs" class="headerlink" title="6.启动 Bochs"></a>6.启动 Bochs</h3><h4 id="创建虚拟硬盘"><a href="#创建虚拟硬盘" class="headerlink" title="创建虚拟硬盘"></a>创建虚拟硬盘</h4><pre><code class="bash">    cd ~/OS/bochs/bin
+    ./bximage -hd -mode=&quot;flat&quot; -size=60 -q hd60M.img</code></pre>
+<p>&#8195;&#8195;文件夹下多了个硬盘文件：<br><img src="/2021/04/21/1-install/1_install_bochs_hd.png" alt="硬盘文件" title="hard_disk_file"></p>
+<h4 id="创建虚拟硬盘配置文件"><a href="#创建虚拟硬盘配置文件" class="headerlink" title="创建虚拟硬盘配置文件"></a>创建虚拟硬盘配置文件</h4><p>&#8195;&#8195;将<code>~/OS/bochs/share/doc/bochs</code>目录下的<code>bochsrc-sample.txt</code>文件复制到<code>~/OS/bochs/bin</code>目录下，并将名字修改为<code>bochsrc.disk</code>。<br>&#8195;&#8195;参考文件内容写配置文件，如：</p>
+<pre><code class="bash">    megs: 32 #第一步，首先设置 Bochs在运行过程中能够使用的内存，本例为32MB
+
+    romimage: file=/home/QYT/OS/bochs/share/bochs/BIOS-bochs-latest #第二步，设置对应真实机器的 BIOS 
+    vgaromimage: file=/home/QYT/OS/bochs/share/bochs/VGABIOS-lgpl-latest # VGA BI0s
+
+    boot: disk #第四步，选择启动盘: 硬盘启动。
+
+    log: bochs.out #第五步，设置日志文件的输出
+
+    mouse: enabled=0 #第六步，开启或关闭某些功能: 关鼠标
+    keyboard_mapping: enabled=1, map=/home/QYT/OS/bochs/share/bochs/keymaps/x11-pc-us.map  #开键盘
+
+    ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14  #硬盘设置
+    ata0-master: type=disk, path=&quot;hd60M.img&quot;, mode=flat, cylinders=121, heads=16, spt=63 </code></pre>
+<p><img src="/2021/04/21/1-install/1_install_bochs_disk.png" alt="启动配置" title="disk_file"></p>
+<h4 id="写启动程序"><a href="#写启动程序" class="headerlink" title="写启动程序"></a>写启动程序</h4><p>&#8195;&#8195;因为程序需要用<code>nasm</code>编译，所以写启动程序前先检查下是否安装了 nasm 。</p>
+<pre><code class="bash">    nasm -v</code></pre>
+<p>&#8195;&#8195;如果显示未找到命令，则还没安装。如果没安装，就先安装。<a href="https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D">下载 nasm </a><br>&#8195;&#8195;选择一个版本下载，我选的是<a href="https://www.nasm.us/pub/nasm/releasebuilds/2.15.04/nasm-2.15.04.tar.gz">这个</a>。下载好后解压到合适的位置。</p>
+<pre><code class="bash">    cd ~/OS/nasm-2.15.04/
+    ./configure
+    sudo make install
+    nasm -v #检查是否安装成功</code></pre>
+<p><img src="/2021/04/21/1-install/1_install_bochs_nasm.png" alt="安装 nasm " title="nasm"></p>
+<p>&#8195;&#8195;安装好 nasm 后开始写启动程序：在<code>~/OS/bochs/bin</code>目录下新建文本文件，命名为<code>mbr.asm</code>: </p>
+<pre><code class="bash">    cd ~/OS/bochs/bin/
+    touch mbr.asm</code></pre>
+<p><img src="/2021/04/21/1-install/1_install_bochs_mbr.png" alt=" 创建文件 mbr.asm " title="mbr"></p>
+<p>&#8195;&#8195;写入以下内容并保存（可以修改需要显示的字符串）：</p>
+<pre><code class="asm">    ; 主引导程序
+SECTION MBR vstart=0x7c00 ; 程序起始地址
+    mov ax, cs      ; BIOS通过jmp 0: 0x7c00跳转到本MBR程序，所以此时cs为0x7c00
+    mov ds, ax      ; 使用寄存器初始化其他段寄存器 
+    mov es, ax
+    mov ss, ax
+    mov fs, ax
+    mov sp, 0x7c00  ; 初始化栈指针, 目前0x7c00以上是程序代码，以下暂时是安全的
+                    ; 所以把它当做栈来使用，栈是向下生长的
+
+    ; int 0x10 为执行 BIOS 0x10 号中断，功能号存放在ah中，功能属性存放在bx中.具体参考BIOS中断手册
+
+    ; 0x06 号清屏功能， 上卷全部行，清楚BIOS检测设备输出的结果信息
+    mov ax, 0x600   ; ah=0x06：功能号， al=上卷行数，=0为全部
+    mov bx, 0x700   ; bh为上卷行属性。
+    mov cx, 0       ; 左上角（cl, ch）=（0， 0）
+    mov dx, 0x184f  ; 右下角（dl, dh）=（0x4f=80， 0x18=25）
+                    ; VAG 文本模式中， 一行只容纳80个字符， 共25行
+    int     0x10    ; 中断执行清屏功能
+
+    ; 获取光标位置（本质上是显存中的地址），从光标处打印字符可以防止打印的字符覆盖其他输出
+    mov ah, 3       ; 3号子功能获取光标, 需要存入 ah 
+    mov bh, 0       ; 获取光标的页号为0, 需要存入 bh
+
+    int     0x10    ; 中断输出cx,dx：ch=光标开始行，cl=光标结束行
+                    ; dh=光标所在行号， dl=光标所在列号
+
+    ; 显示字符串
+    mov ax, message
+    mov bp, ax      ; es:bp 为串首地址
+
+    mov cx, 32      ; 串长度，不包括结束符
+    mov ax, 0x1301  ; ah=13 为子功能号，用于显示字符，al=01：显示字符串，光标跟随移动
+
+    mov bx, 0x2     ; bh=0：显示的页号， bl=2：字符属性：黑底绿字
+
+    int     0x10    ; 中断执行显示字符串功能
+
+    jmp     $       ; 使程序悬停在此
+
+    message db &quot;1 MBR, I&#39;M QYT, HELLO, OS WORLD&quot;
+    times 510-($-$$) db 0   ; $:本行, $$:本 section 的起始地址， 1个扇区512字节，减去末尾2字节=510字节。此行表示用 0 填满本扇区剩余的容量
+    db  0x55, 0xaa          ; MBR 末尾2字节固定的魔数，表示此 MBR 正常可用。</code></pre>
+<p>&#8195;&#8195;保存后编译该文件并将编译后的文件写入硬盘：</p>
+<pre><code class="bash">    # 编译此文件
+    nasm -o mbr.bin mbr.asm
+
+    # 查看编译后的 bin 文件信息
+    ls -lb mbr.bin
+
+    # 将文件 bin 写入0盘0道1扇区：
+    # 其中 sudo 是管理员运行， dd 是磁盘操作指令，if 是读取的文件，of 是写入的文件
+    # bs 是块大小，count 是块数，conv 是如何输入文件：notrunc为不打断文件。
+    sudo dd if=mbr.bin of=hd60M.img bs=512 count=1 conv=notrunc
+
+    #通过配置文件 bochsrc.disk 启动bochs
+    sudo ./bochs -f bochsrc.disk</code></pre>
+<p><img src="/2021/04/21/1-install/1_install_bochs_commbr.png" alt=" 编译启动" title="compile_mbr"></p>
+<h4 id="开始启动bochs"><a href="#开始启动bochs" class="headerlink" title="开始启动bochs"></a>开始启动<code>bochs</code></h4><p>&#8195;&#8195;能够启动了，还是蛮开心的。<br><img src="/2021/04/21/1-install/1_install_bochs_start1.png" alt="启动" title="start"></p>
+<p>&#8195;&#8195;提示输入 6 ，可以输入 6 后按回车键，也可以直接按回车键。按回车后，会弹出一个黑框。<br><img src="/2021/04/21/1-install/1_install_bochs_start2.png" alt="启动" title="start"></p>
+<p>&#8195;&#8195;然后输入小写字母<code>c</code>。开始启动！可以看到黑框输出了字符串。<br><img src="/2021/04/21/1-install/1_install_bochs_success.png" alt="启动" title="success!"></p>
+]]></content>
+      <categories>
+        <category>OS</category>
+      </categories>
+      <tags>
+        <tag>操作系统真象还原</tag>
+        <tag>OS</tag>
+        <tag>VirtualBox</tag>
+        <tag>Linux</tag>
+        <tag>Bochs</tag>
       </tags>
   </entry>
 </search>

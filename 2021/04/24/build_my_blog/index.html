@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/%E9%98%BF%E7%8B%B832-32.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E9%9D%92%E5%B1%B132-32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E9%9D%92%E5%B1%B116-16.ico">
+  <link rel="mask-icon" href="/images/%E9%98%BF%E7%8B%B8-32-32.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":9},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="&amp;#8195;&amp;#8195;记录一下自己在Windows系統下利用GitHub简单搭建博客的过程，因为有很多不懂的地方，所以走了一些弯路。而我相信，这些问题以后我还是会犯的，所以简单记录一下，等以后又出现类似的问题找不着北的时候可以翻翻看（我太菜了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 系統下 利用 GitHub 简单搭建博客">
+<meta property="og:url" content="https://kiddy-sky.github.io/2021/04/24/build_my_blog/index.html">
+<meta property="og:site_name" content="青山客">
+<meta property="og:description" content="&amp;#8195;&amp;#8195;记录一下自己在Windows系統下利用GitHub简单搭建博客的过程，因为有很多不懂的地方，所以走了一些弯路。而我相信，这些问题以后我还是会犯的，所以简单记录一下，等以后又出现类似的问题找不着北的时候可以翻翻看（我太菜了">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-24T00:49:23.000Z">
+<meta property="article:modified_time" content="2021-04-30T16:14:14.669Z">
+<meta property="article:author" content="青山">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kiddy-sky.github.io/2021/04/24/build_my_blog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Windows 系統下 利用 GitHub 简单搭建博客 | 青山客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">青山客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">青山依旧在，几度夕阳红</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/Kiddy-Sky" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kiddy-sky.github.io/2021/04/24/build_my_blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E9%98%BF%E7%8B%B8%E5%A4%B4%E5%83%8F.png">
+      <meta itemprop="name" content="青山">
+      <meta itemprop="description" content="一息若存，希望不灭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="青山客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows 系統下 利用 GitHub 简单搭建博客
+        </h1>
+
+        <div class="post-meta">
+        
+        
+          
+        
+        
+        
+        <script src=""></script>
+        <link href="" rel="stylesheet">
+          <script>
+            (function () {
+                if ('') {
+                    if (prompt(' Please enter a password :') !== '') {
+                        alert(' Password error !');
+                        if (history.length === 1) {
+                            location.replace("https://kiddy-sky.github.io/"); 
+                        } else {
+                            history.back();
+                        }
+                    }
+                }
+            })();
+        </script>
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-24 08:49:23" itemprop="dateCreated datePublished" datetime="2021-04-24T08:49:23+08:00">2021-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-01 00:14:14" itemprop="dateModified" datetime="2021-05-01T00:14:14+08:00">2021-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A0%E5%A4%B4%E8%8B%8D%E8%9D%87/" itemprop="url" rel="index">
+                    <span itemprop="name">无头苍蝇</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&#8195;&#8195;记录一下自己在<code>Windows</code>系統下利用<code>GitHub</code>简单搭建博客的过程，因为有很多不懂的地方，所以走了一些弯路。而我相信，这些问题以后我还是会犯的，所以简单记录一下，等以后又出现类似的问题找不着北的时候可以翻翻看（我太菜了</p>
+<span id="more"></span>
+
+<ul>
+<li><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><h5 id="1-注册一个-GitHub-账号"><a href="#1-注册一个-GitHub-账号" class="headerlink" title="1. 注册一个 GitHub 账号"></a>1. 注册一个 <a target="_blank" rel="noopener" href="https://github.com">GitHub</a> 账号</h5><h5 id="2-创建GitHub仓库，名字为：你的GitHub名字-github-io"><a href="#2-创建GitHub仓库，名字为：你的GitHub名字-github-io" class="headerlink" title="2. 创建GitHub仓库，名字为：你的GitHub名字.github.io"></a>2. 创建GitHub仓库，名字为：你的GitHub名字.github.io</h5><h5 id="3-安装-Git-Bash并做好相关配置"><a href="#3-安装-Git-Bash并做好相关配置" class="headerlink" title="3. 安装 Git Bash并做好相关配置"></a>3. 安装 <a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git Bash</a>并做好相关配置</h5><h5 id="4-安装-Node-js"><a href="#4-安装-Node-js" class="headerlink" title="4. 安装 Node.js"></a>4. 安装 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a></h5><h5 id="5-安装-Hexo"><a href="#5-安装-Hexo" class="headerlink" title="5. 安装 Hexo"></a>5. 安装 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></h5><h5 id="6-C-Users-work-Blog-gt-hexo-init-Sky-初始化博客内容"><a href="#6-C-Users-work-Blog-gt-hexo-init-Sky-初始化博客内容" class="headerlink" title="6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容"></a>6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容</h5><h5 id="7-修改C-Users-work-Blog-Sky-themes-next目录下的-config-yml主题配置文件，更改博客配置"><a href="#7-修改C-Users-work-Blog-Sky-themes-next目录下的-config-yml主题配置文件，更改博客配置" class="headerlink" title="7. 修改C:\Users\work\Blog\Sky\themes\next目录下的_config.yml主题配置文件，更改博客配置"></a>7. 修改<code>C:\Users\work\Blog\Sky\themes\next</code>目录下的<code>_config.yml</code>主题配置文件，更改博客配置</h5><h5 id="8-更新并重新部署博客的步骤："><a href="#8-更新并重新部署博客的步骤：" class="headerlink" title="8. 更新并重新部署博客的步骤："></a><strong>8. 更新并重新部署博客的步骤：</strong></h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-清除-public-目录下的文件"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-清除-public-目录下的文件" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-生成静态文件"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-生成静态文件" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-启动服务器查看本地博客"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-启动服务器查看本地博客" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客</h5><h5 id="8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-将博客部署到-Github-上"><a href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-将博客部署到-Github-上" class="headerlink" title="&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上"></a>&#8195; &#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上</h5></li>
+<li><h3 id="过程："><a href="#过程：" class="headerlink" title="过程："></a><strong>过程：</strong></h3></li>
+<li><h4 id="需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的"><a href="#需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的" class="headerlink" title="需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的"></a>需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的</h4></li>
+</ul>
+<blockquote>
+<ol>
+<li>注册一个 GitHub 账号，注册后顺便创建一个与你用户名相同的<code>.github.io</code>仓库即<code>你的名字.github.io</code>，这样等你搭建好博客之后就能用<code>https://你的用户名.github.io</code>访问你的博客了。到此问题应该不大，如果有，多百度几次。<a target="_blank" rel="noopener" href="https://github.com">GitHub 官网</a></li>
+<li>安装<code>Git Bash</code>，问题应该也不大。<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git Bash 官网</a> </li>
+<li>配置 <code>SSH</code>。<br>&#8195;&#8195;先检查是否配置了 SSH：在 Bash 中输入如下命令，若出现以下提示，说明还没有配置 SSH 。<pre><code class="bash"> $ cd ~/.ssh
+ bash: cd: /c/Users/asus/.ssh: No such file or directory</code></pre>
+&#8195;&#8195;配置 SSH ：<pre><code class="bash"> ssh-keygen -t rsa -C &quot;你的邮件地址&quot;</code></pre>
+&#8195;&#8195;然后打开 SSH key，将这一串内容复制到你的 github 主页：settings -&gt; SSH and GPG keys -&gt; New SSH key -&gt; key<pre><code class="bash"> $ cat ~/.ssh/id_rsa.pub</code></pre>
+&#8195;&#8195;测试能否使用：出现类似提示就是成功了。<pre><code class="bash"> $ ssh -T git@github.com # 邮箱地址不用改
+ Hi Kiddy-Sky! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></pre>
+&#8195;&#8195;最后绑定用户。每一个 Git 的提交都会使用这些信息，并且会写入到每一次提交中。<pre><code class="bash"> $ git config --global user.name &quot;liuxianan&quot;// 你的github用户名，非昵称
+ $ git config --global user.email  &quot;xxx@qq.com&quot;// 填写你的github注册邮箱</code></pre>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>安装<code>Node.js</code>，问题应该也不大，一路默认安装下去就行了。<a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js 官网</a> </li>
+<li>安装<code>Hexo</code>，这个我貌似出了一点状况。</li>
+<li>配置好相关的环境。</li>
+</ol>
+</blockquote>
+<ul>
+<li><h4 id="Hexo安装过程："><a href="#Hexo安装过程：" class="headerlink" title="Hexo安装过程："></a><code>Hexo</code>安装过程：</h4></li>
+</ul>
+<blockquote>
+<ol>
+<li>在<code>Blog</code>文件夹打开<code>CMD</code></li>
+<li>查看是否安装好<code>npm</code>和<code>node</code>，看到出现版本信息，证明安装好了。<pre><code class="CMD"> C:\Users\work\Blog&gt;node -v
+ v12.13.0
+ C:\Users\work\Blog&gt;npm -v
+ 6.12.0</code></pre>
+</li>
+<li>接着安装<code>Hexo</code>：<a target="_blank" rel="noopener" href="https://hexo.io">Hexo官网</a>。如果可以直接在当前目录下右键打开 CMD，不行就打开<code>CMD</code>后<code>cd</code>到你的博客文件夹目录下，或者你安装了<code>Git</code>后也可以直接在目标文件夹下直接右键打开<code>Git Bash</code>。<pre><code class="bash"> npm install -g hexo-cil
+ npm install hexo-cil -g</code></pre>
+<pre><code class="CMD"> C:\Users\work\Blog&gt;npm install -g hexo-cil
+ npm ERR! code E404
+ npm ERR! 404 Not Found - GET https://registry.npmjs.org/hexo-cil - Not found
+ npm ERR! 404
+ npm ERR! 404  &#39;hexo-cil@latest&#39; is not in the npm registry.
+ npm ERR! 404 You should bug the author to publish it (or use the name yourself!)
+ npm ERR! 404
+ npm ERR! 404 Note that you can also install from a
+ npm ERR! 404 tarball, folder, http url, or git url.</code></pre>
+</li>
+</ol>
+</blockquote>
+<pre><code>npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\asus\AppData\Roaming\npm-cache\_logs\2019-11-02T11_39_50_447Z-debug.log     </code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;然后我输入` hexo -v `想看下是否安装了` hexo `，出现了问题
+``` CMD
+    C:\Users\work\Blog&gt;hexo -v
+    &#39;hexo&#39; 不是内部或外部命令，也不是可运行的程序
+    或批处理文件。</code></pre><blockquote>
+<p>&#8195;&#8195;我记得是安装过了的，因为原来搭建的博客有些地方有点问题，让我不太满意，我又找不到问题出在哪里，所以我是重新再搭建一个。所以我觉得出现这个问题很奇怪，我以为是我环境没配置好，所以又去看了下，觉得应该没有问题才对。然后我又在<code>Blog</code>文件夹打开<code>Git Bash</code>，输入如下命令查看，还是有问题。</p>
+</blockquote>
+<pre><code class="CMD">    asus@DESKTOP-58AL0J1 MINGW64 /c/Users/work/Blog (master)
+    $ hexo -v
+    bash: hexo: command not found</code></pre>
+<p>&#8195;&#8195;然后我又来试试看输入以下命令，发现可以了耶。（虽然我还是很纳闷，怎么上次搭建博客的时候<code>hexo -v</code>就能直接用，这次需要加上<code>npm</code></p>
+<pre><code class="CMD">    asus@DESKTOP-58AL0J1 MINGW64 /c/Users/work/Blog (master)
+    $ npm hexo -v
+    6.12.0 </code></pre>
+</blockquote>
+<pre><code>asus@DESKTOP-58AL0J1 MINGW64 /c/Users/work/Blog (master)
+$ npm hexo-cil -v
+6.12.0</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;然后我又屁颠屁颠跑去` CMD `命令窗口输入命令，果然，没问题了。(个人喜欢在` CMD `输入命令，因为可以` ctrl+c `,` ctrl+v `复制粘贴，在` Git Bash `复制粘贴要右键)
+``` CMD
+    C:\Users\work\Blog&gt;npm hexo -v
+    6.12.0</code></pre><p>&#8195;&#8195;然后接着输入（为什么这样就可以，咱也不懂，咱也不敢问，咱也不知道问谁</p>
+<pre><code class="CMD">    C:\Users\work\Blog&gt;npm install hexo --save
+    npm WARN saveError ENOENT: no such file or directory, open &#39;C:\Users\work\Blog\package.json&#39;
+    npm notice created a lockfile as package-lock.json. You should commit this file.
+    npm WARN enoent ENOENT: no such file or directory, open &#39;C:\Users\work\Blog\package.json&#39;
+    npm WARN Blog No description
+    npm WARN Blog No repository field.
+    npm WARN Blog No README data
+    npm WARN Blog No license field.
+    npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.1 (node_modules\fsevents):
+    npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.1: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)
+    npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules\nunjucks\node_modules\fsevents):
+    npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</code></pre>
+</blockquote>
+<pre><code>+ hexo@4.0.0
+added 287 packages from 438 contributors and audited 2458 packages in 72.541s
+found 0 vulnerabilities</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;然后再输入发现能用了耶。（其实我不知道这些命令的具体用途，瞎按就是了，能用就行，用多了或者就能总结出来了。不管黑猫白猫，抓到耗子的就是好猫。嘿嘿
+``` CMD
+    C:\Users\work\Blog&gt;hexo -v
+    hexo-cli: 3.1.0
+    os: Windows_NT 10.0.18362 win32 x64
+    node: 12.13.0
+    v8: 7.7.299.13-node.12
+    uv: 1.32.0
+    zlib: 1.2.11
+    brotli: 1.0.7
+    ares: 1.15.0
+    modules: 72
+    nghttp2: 1.39.2
+    napi: 5
+    llhttp: 1.1.4
+    http_parser: 2.8.0
+    openssl: 1.1.1d
+    cldr: 35.1
+    icu: 64.2
+    tz: 2019a
+    unicode: 12.1</code></pre><ol start="4">
+<li>好了，既然安装好了，就开始搭建博客吧~ 先来初始化。这时候会下载一些相关的依赖包什么的（我喜欢用<code>CMD</code>的一个原因还有，它会显示安装进度，而我的<code>Git Bash</code>不会，当时输入安装命令后等了一会儿，<code>Git Bash</code>没反应，我还以为是我电脑卡住了，直接关了窗口重新打开）<pre><code class="CMD"> C:\Users\work\Blog&gt;hexo init Sky
+ INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git
+ Cloning into &#39;C:\Users\work\Blog\Sky&#39;...
+ remote: Enumerating objects: 22, done.
+ remote: Counting objects: 100% (22/22), done.
+ remote: Compressing objects: 100% (17/17), done.
+ remote: Total 153 (delta 8), reused 8 (delta 3), pack-reused 131
+ Receiving objects: 100% (153/153), 29.67 KiB | 31.00 KiB/s, done.
+ Resolving deltas: 100% (70/70), done.
+ Submodule &#39;themes/landscape&#39; (https://github.com/hexojs/hexo-theme-landscape.git) registered for path &#39;themes/landscape&#39;
+ Cloning into &#39;C:/Users/work/Blog/Sky/themes/landscape&#39;...
+ remote: Enumerating objects: 32, done.
+ remote: Counting objects: 100% (32/32), done.
+ remote: Compressing objects: 100% (25/25), done.
+ remote: Total 1054 (delta 20), reused 10 (delta 7), pack-reused 1022
+ Receiving objects: 100% (1054/1054), 3.21 MiB | 16.00 KiB/s, done.
+ Resolving deltas: 100% (578/578), done.
+ ···
+ added 362 packages from 470 contributors and audited 2622 packages in 90.323s
+ found 0 vulnerabilities</code></pre>
+</li>
+</ol>
+</blockquote>
+<pre><code>INFO  Start blogging with Hexo!</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;新建完成后，指定文件夹目录下应该有以下主要文件：
+``` bash
+    node_modules：依赖包
+    scaffolds：生成文章的一些模板
+    source：用来存放自己的文章
+    themes：网站主题
+    _config.yml：博客的配置文件       </code></pre></blockquote>
+<ul>
+<li><h4 id="生成静态文件吧"><a href="#生成静态文件吧" class="headerlink" title="生成静态文件吧~"></a>生成静态文件吧~</h4></li>
+</ul>
+<blockquote>
+<pre><code class="CMD">    C:\Users\work\Blog&gt;cd Sky
+    C:\Users\work\Blog\Sky&gt;hexo g
+    INFO  Start processing
+    INFO  Files loaded in 169 ms
+    INFO  Generated: index.html
+    INFO  Generated: archives/index.html
+    INFO  Generated: fancybox/jquery.fancybox.css     
+    ···
+    INFO  Generated: css/images/banner.jpg
+    INFO  Generated: 2019/11/02/hello-world/index.html
+    INFO  28 files generated in 623 ms   </code></pre>
+</blockquote>
+<ul>
+<li><h4 id="启动服务器吧"><a href="#启动服务器吧" class="headerlink" title="启动服务器吧~"></a>启动服务器吧~</h4></li>
+</ul>
+<blockquote>
+<pre><code class="CMD">    C:\Users\work\Blog\Sky&gt;hexo s
+    INFO  Start processing
+    INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></pre>
+<p>&#8195;&#8195;然后在网址栏输入<code>http://localhost:4000</code>就可以看到你的博客了~   </p>
+</blockquote>
+<ul>
+<li><h4 id="换自己喜欢的主题"><a href="#换自己喜欢的主题" class="headerlink" title="换自己喜欢的主题~"></a>换自己喜欢的主题~</h4></li>
+</ul>
+<blockquote>
+<p>&#8195;&#8195;看到很多人推荐使用<code>Next</code>主题，刚好我也喜欢这种风格的，然后我就想换种主题风格，所以接着下载喜欢的主题~       </p>
+<pre><code class="CMD">    C:\Users\work\Blog\Sky\themes&gt;git clone https://github.com/theme-next/hexo-theme-next.git themes/next
+    Cloning into &#39;themes/next&#39;...
+    remote: Enumerating objects: 24, done.
+    remote: Counting objects: 100% (24/24), done.
+    remote: Compressing objects: 100% (19/19), done.
+    Receiving objects: 100% (10772/10772), 6.42 MiB | 17.00 KiB/s, done.
+    Resolving deltas: 100% (7037/7037), done.        </code></pre>
+</blockquote>
+<ul>
+<li><h4 id="接着将博客改造成自己喜欢的逼格吧"><a href="#接着将博客改造成自己喜欢的逼格吧" class="headerlink" title="接着将博客改造成自己喜欢的逼格吧~"></a>接着将博客改造成自己喜欢的逼格吧~</h4></li>
+</ul>
+<blockquote>
+<p>&#8195;&#8195;打开<code>C:\Users\work\Blog\Sky\themes\next</code>目录下的<code>_config.yml</code>文件<br>&#8195;&#8195;我将文件的如下内容进行了修改, 你可以按照自己的爱好修改, 看不懂百度上有很多对每个模块内容的解说, 自己搜：</p>
+<pre><code class="yml">    favicon: //图标我是自己做好放在该目录下的` images `文件夹里的
+      small: /images/青山16-16.ico
+      medium: /images/青山32-32.ico
+      apple_touch_icon: /images/阿狸32-32.ico
+      safari_pinned_tab: /images/阿狸-32-32.ico</code></pre>
+</blockquote>
+<pre><code> icon: //页面最底下的人物颜色
+    color: &quot;#036485&quot;
+
+# Schemes //更换主题
+scheme: Pisces
+
+menu: //增加标签和分类按钮
+  tags: /tags/ || tags
+  categories: /categories/ || th
+
+avatar: //增加头像并使之椭圆、旋转
+  url: /images/阿狸头像.png
+  rounded: true
+  rotated: true 
+
+social: //社交链接
+  GitHub: https://github.com/Kiddy-Sky || github
+
+auto_excerpt: //显示文章摘要
+  enable: true
+
+symbols_count_time: //显示文本总数
+   item_text_total
+
+tag_icon: true //显示标签图标
+
+mobile_layout_economy: true //手机端
+
+codeblock: 代码块
+  highlight_theme: night bright 
+  copy_button:
+    enable: true
+    show_result: true
+    style: default  
+
+back2top: //返回开头按钮
+  enable: true
+  sidebar: ture
+  scrollpercent: true
+
+reading_progress: //阅读进度
+  enable: false
+  position: top
+  color: &quot;#003636&quot;
+  height: 2px  
+
+bookmark: //书签
+  enable: ture
+
+github_banner: //右上角的 GitHub 图案
+  enable: ture
+  permalink: https://github.com/Kiddy-Sky
+  title: Follow me on GitHub
+
+busuanzi_count: //底下的统计
+  enable: ture
+
+//搜索
+algolia_search:
+    per_page: 9
+
+local_search:
+  enable: ture
+  top_n_per_article: 5
+  unescape: ture
+  preload: ture
+
+canvas_nest: //动态背景
+  enable: ture
+  onmobile: true 
+  color: &quot;0,51,102&quot; 
+  opacity: 0.3 # The opacity of line: 0~1    </code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;其他的修改自己挖掘吧，除此之外我还增加了一些自己喜欢的内容，按照自己的兴趣修改吧，不懂就百度看一下别人是怎么改的，依葫芦画瓢就 OK 啦~实在不行就修改后看看页面哪里发生了变化就知道修改的是什么啦~</code></pre></blockquote>
+<ul>
+<li><h4 id="准备将本地改造好的博客部署到GitHub上吧-这样就能用网址访问啦"><a href="#准备将本地改造好的博客部署到GitHub上吧-这样就能用网址访问啦" class="headerlink" title="准备将本地改造好的博客部署到GitHub上吧~ 这样就能用网址访问啦~"></a>准备将本地改造好的博客部署到<code>GitHub</code>上吧~ 这样就能用网址访问啦~</h4></li>
+</ul>
+<blockquote>
+<p>&#8195;&#8195;部署到<code>GitHub</code>之前先修改<code>C:\Users\work\Blog\Sky</code>目录下的<code>_config.yml</code>文件，修改成自己的信息才能成功将本地博客部署到自己的博客上。以下以我的为例：</p>
+<pre><code class="yml">    # Extensions
+    ## Plugins: https://hexo.io/plugins/
+    ## Themes: https://hexo.io/themes/
+    theme: next  //使用的主题，下载有的就可以用</code></pre>
+</blockquote>
+<pre><code># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git //修改成自己的 GitHub 博客仓库就行了
+  branch: master</code></pre><blockquote>
+<pre><code>&amp;#8195;&amp;#8195;其他的修改自己看说明或者百度~
+
+&amp;#8195;&amp;#8195;将本地改造好的博客部署到` GitHub `上吧~ 这样就能用网址访问啦~
+
+``` CMD
+    C:\Users\work\Blog\Sky&gt;hexo d
+    INFO  Deploying: git
+    INFO  Clearing .deploy_git folder...
+    INFO  Copying files from public folder...
+    INFO  Copying files from extend dirs...
+    warning: LF will be replaced by CRLF in 2019/10/10/about-git/index.html.
+    The file will have its original line endings in your working directory
+    warning: LF will be replaced by CRLF in 2019/11/01/build-my-blog/index.html.
+    The file will have its original line endings in your working directory
+    warning: LF will be replaced by CRLF in 2019/11/02/hello-world/index.html.
+    ...//省略部分内容
+    Counting objects: 100% (82/82), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (26/26), done.
+    Writing objects: 100% (42/42), 3.14 KiB | 229.00 KiB/s, done.
+    Total 42 (delta 18), reused 0 (delta 0)
+    remote: Resolving deltas: 100% (18/18), completed with 17 local objects.
+    To https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git
+       dd4babe..c4a65dc  HEAD -&gt; master
+    Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;https://github.com/Kiddy-Sky/Kiddy-Sky.github.io.git&#39;.
+    [32mINFO [39m Deploy done: [35mgit[39m</code></pre><p>&#8195;&#8195;将本地改造好的博客部署到<code>GitHub</code>上后，试试用网址访问吧~</p>
+</blockquote>
+<ul>
+<li><h4 id="提示：修改文章后需要先hexo-c-清除-public目录下文件再hexo-g重新生成静态文件后再hexo-d部署到-GitHub-上，不然文章的内容可能和你预想中的不一样哦"><a href="#提示：修改文章后需要先hexo-c-清除-public目录下文件再hexo-g重新生成静态文件后再hexo-d部署到-GitHub-上，不然文章的内容可能和你预想中的不一样哦" class="headerlink" title="提示：修改文章后需要先hexo c 清除 public目录下文件再hexo g重新生成静态文件后再hexo d部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~"></a>提示：修改文章后需要先<code>hexo c</code> 清除 <code>public</code>目录下文件再<code>hexo g</code>重新生成静态文件后再<code>hexo d</code>部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~</h4></li>
+</ul>
+<blockquote>
+<pre><code class="CMD">    C:\Users\work\Blog\Sky&gt;hexo clean #清除 public 目录下文件
+    C:\Users\work\Blog\Sky&gt;hexo g     #生成静态文件
+    C:\Users\work\Blog\Sky&gt;hexo s     #网页效果查看
+    C:\Users\work\Blog\Sky&gt;hexo d     #部署到 GitHub </code></pre>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;
+        	color: #003636;font-size:16px;
+        	">-------------本文结束 <i class="fa fa-user"></i> 感谢您的阅读-------------
+        </div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2021/04/22/2/" rel="next" title="第二步：XXX">
+                  <i class="fa fa-chevron-left"></i> 第二步：XXX
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA-GitHub-%E8%B4%A6%E5%8F%B7"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 注册一个 GitHub 账号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BAGitHub%E4%BB%93%E5%BA%93%EF%BC%8C%E5%90%8D%E5%AD%97%E4%B8%BA%EF%BC%9A%E4%BD%A0%E7%9A%84GitHub%E5%90%8D%E5%AD%97-github-io"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 创建GitHub仓库，名字为：你的GitHub名字.github.io</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85-Git-Bash%E5%B9%B6%E5%81%9A%E5%A5%BD%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 安装 Git Bash并做好相关配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85-Node-js"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 安装 Node.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 安装 Hexo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-C-Users-work-Blog-gt-hexo-init-Sky-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. C:\Users\work\Blog&gt;hexo init Sky  # 初始化博客内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-%E4%BF%AE%E6%94%B9C-Users-work-Blog-Sky-themes-next%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84-config-yml%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E6%9B%B4%E6%94%B9%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. 修改C:\Users\work\Blog\Sky\themes\next目录下的_config.yml主题配置文件，更改博客配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-%E6%9B%B4%E6%96%B0%E5%B9%B6%E9%87%8D%E6%96%B0%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. 更新并重新部署博客的步骤：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-c-%E6%B8%85%E9%99%A4-public-%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.9.</span> <span class="nav-text">&amp;#8195; &amp;#8195; C:\Users\work\Blog\Sky&gt;hexo c  # 清除 public 目录下的文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-g-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.10.</span> <span class="nav-text">&amp;#8195; &amp;#8195; C:\Users\work\Blog\Sky&gt;hexo g  # 生成静态文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-s-%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.0.11.</span> <span class="nav-text">&amp;#8195; &amp;#8195; C:\Users\work\Blog\Sky&gt;hexo s  # 启动服务器查看本地博客</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8195-8195-C-Users-work-Blog-Sky-gt-hexo-d-%E5%B0%86%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0-Github-%E4%B8%8A"><span class="nav-number">1.0.12.</span> <span class="nav-text">&amp;#8195; &amp;#8195; C:\Users\work\Blog\Sky&gt;hexo d  # 将博客部署到 Github 上</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%EF%BC%88%E4%B8%8D%E6%87%82%E5%8F%AF%E4%BB%A5%E5%A4%9A%E7%9C%8B%E5%AE%98%E7%BD%91%E7%9A%84%E4%BB%8B%E7%BB%8D%EF%BC%8C%E4%B8%80%E8%88%AC%E9%83%BD%E6%9C%89%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%8C%E6%88%96%E8%80%85%E5%A4%9A%E7%99%BE%E5%BA%A6%E7%9C%8B%E5%88%AB%E4%BA%BA%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84"><span class="nav-number">2.1.</span> <span class="nav-text">需要的准备工作：（不懂可以多看官网的介绍，一般都有一些常见问题的解决办法，或者多百度看别人怎么解决的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hexo%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo安装过程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%A7"><span class="nav-number">2.3.</span> <span class="nav-text">生成静态文件吧~</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%A7"><span class="nav-number">2.4.</span> <span class="nav-text">启动服务器吧~</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E8%87%AA%E5%B7%B1%E5%96%9C%E6%AC%A2%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="nav-number">2.5.</span> <span class="nav-text">换自己喜欢的主题~</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E7%9D%80%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%94%B9%E9%80%A0%E6%88%90%E8%87%AA%E5%B7%B1%E5%96%9C%E6%AC%A2%E7%9A%84%E9%80%BC%E6%A0%BC%E5%90%A7"><span class="nav-number">2.6.</span> <span class="nav-text">接着将博客改造成自己喜欢的逼格吧~</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B0%86%E6%9C%AC%E5%9C%B0%E6%94%B9%E9%80%A0%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0GitHub%E4%B8%8A%E5%90%A7-%E8%BF%99%E6%A0%B7%E5%B0%B1%E8%83%BD%E7%94%A8%E7%BD%91%E5%9D%80%E8%AE%BF%E9%97%AE%E5%95%A6"><span class="nav-number">2.7.</span> <span class="nav-text">准备将本地改造好的博客部署到GitHub上吧~ 这样就能用网址访问啦~</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E5%90%8E%E9%9C%80%E8%A6%81%E5%85%88hexo-c-%E6%B8%85%E9%99%A4-public%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E5%86%8Dhexo-g%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8E%E5%86%8Dhexo-d%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub-%E4%B8%8A%EF%BC%8C%E4%B8%8D%E7%84%B6%E6%96%87%E7%AB%A0%E7%9A%84%E5%86%85%E5%AE%B9%E5%8F%AF%E8%83%BD%E5%92%8C%E4%BD%A0%E9%A2%84%E6%83%B3%E4%B8%AD%E7%9A%84%E4%B8%8D%E4%B8%80%E6%A0%B7%E5%93%A6"><span class="nav-number">2.8.</span> <span class="nav-text">提示：修改文章后需要先hexo c 清除 public目录下文件再hexo g重新生成静态文件后再hexo d部署到 GitHub 上，不然文章的内容可能和你预想中的不一样哦~</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="青山"
+    src="/images/%E9%98%BF%E7%8B%B8%E5%A4%B4%E5%83%8F.png">
+  <p class="site-author-name" itemprop="name">青山</p>
+  <div class="site-description" itemprop="description">一息若存，希望不灭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Kiddy-Sky" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;Kiddy-Sky" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">青山</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">17k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">16 分钟</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.5.0
+  </div>
+-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='114,140,180' opacity='1' zIndex='-1' count='128' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script src="/lib/fancybox/source/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'dark',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+  
+
+  
+
+
+<!-- 彩色爆炸 -->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+  
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+
+<!-- 音频播放 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+<!-- 代码高亮 -->
+<link rel="stylesheet" href="/dist/monokai-sublime.css">
+<script type="text/javascript"src="/dist/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

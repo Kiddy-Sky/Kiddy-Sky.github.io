@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/%E9%98%BF%E7%8B%B832-32.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/%E9%9D%92%E5%B1%B132-32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/%E9%9D%92%E5%B1%B116-16.ico">
@@ -14,6 +14,7 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.min.css">
 
 
 <script id="hexo-configurations">
@@ -27,7 +28,7 @@
     copycode: {"enable":true,"show_result":true,"style":"default"},
     back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
     bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: false,
+    fancybox: true,
     mediumzoom: false,
     lazyload: false,
     pangu: false,
@@ -50,14 +51,15 @@
   };
 </script>
 
-  <meta name="description" content="老来多健忘">
-<meta name="keywords" content="青山, 博客">
+  <meta name="description" content="一息若存，希望不灭">
 <meta property="og:type" content="website">
 <meta property="og:title" content="青山客">
-<meta property="og:url" content="https:&#x2F;&#x2F;kiddy-sky.github.io&#x2F;categories&#x2F;OS&#x2F;index.html">
+<meta property="og:url" content="https://kiddy-sky.github.io/categories/OS/index.html">
 <meta property="og:site_name" content="青山客">
-<meta property="og:description" content="老来多健忘">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="一息若存，希望不灭">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="青山">
+<meta property="article:tag" content="青山, 博客">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://kiddy-sky.github.io/categories/OS/">
@@ -122,7 +124,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">青山依旧在，几度夕阳红。</p>
+        <p class="site-subtitle">青山依旧在，几度夕阳红</p>
   </div>
 
   <div class="site-nav-toggle">
@@ -324,7 +326,7 @@
   <img class="site-author-image" itemprop="image" alt="青山"
     src="/images/%E9%98%BF%E7%8B%B8%E5%A4%B4%E5%83%8F.png">
   <p class="site-author-name" itemprop="name">青山</p>
-  <div class="site-description" itemprop="description">老来多健忘</div>
+  <div class="site-description" itemprop="description">一息若存，希望不灭</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -388,16 +390,16 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">10k</span>
+    <span title="站点总字数">17k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">16 分钟</span>
 </div>
 <!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.5.0
@@ -444,13 +446,25 @@
 
   
   
-  <script color='114,140,180' opacity='0.5' zIndex='-1' count='128' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script color='114,140,180' opacity='1' zIndex='-1' count='128' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script src="/lib/fancybox/source/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -459,7 +473,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -494,7 +510,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
 <!-- 彩色爆炸 -->
 
    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
-   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
 
@@ -509,6 +524,11 @@ if (document.querySelectorAll('pre.mermaid').length) {
 <div id="aplayer"></div>
 <script type="text/javascript" src="/dist/APlayer.min.js"></script>
 <script type="text/javascript" src="/dist/music.js"></script>
-  
-</body>
+
+<!-- 代码高亮 -->
+<link rel="stylesheet" href="/dist/monokai-sublime.css">
+<script type="text/javascript"src="/dist/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
 </html>
