@@ -268,21 +268,32 @@
           
           
           
-        
+
           
           <script src=""></script>
           <link href="" rel="stylesheet">
             <script>
               (function () {
                   if ('') {
-                      if (prompt(' Please enter a password :') !== '') {
+                    var enterPassword = prompt(' Please enter a password :');
+                    console.log("enterPassword:", enterPassword);
+                    if (enterPassword == null || enterPassword == '') {
+                      if (history.length === 1) {
+                        location.replace("/"); 
+                      } else {
+                          history.back();
+                        }
+                    }
+                    else {
+                      if(enterPassword !== '') {
                           alert(' Password error !');
                           if (history.length === 1) {
-                              location.replace("https://kiddy-sky.github.io/"); 
+                            location.replace("https://kiddy-sky.github.io/"); 
                           } else {
                               history.back();
-                          }
+                            }
                       }
+                    }
                   }
               })();
           </script>
